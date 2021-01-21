@@ -22,7 +22,7 @@ public class LoginController extends HttpServlet {
     //private final ControllerCtx context;
     
     @Autowired
-    private UtilisateurDao utilisateurDao;*/
+    private UtilisateurDao utilisateurDao;
 
     /*public LoginController() {
         super();
