@@ -27,6 +27,9 @@ public class Utilisateur implements Serializable {
     private String email;
     private String pseudo;
     private String motDePasse;
+    @Basic
+    @Column(name = "membreAssoY_N")
+    private Integer membreAssoYN;
     private transient Collection<Commentaire> commentaires;
     private transient Collection<Topo> toposProprietaire;
     private transient Collection<Topo> toposEmprunteur;
@@ -134,8 +137,18 @@ public class Utilisateur implements Serializable {
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
+    
+    @Basic
+    @Column(name = "membreAssoY_N")
+    public Integer getMembreAssoYN() {
+		return membreAssoYN;
+	}
 
-    @Override
+	public void setMembreAssoYN(Integer membreAssoYN) {
+		this.membreAssoYN = membreAssoYN;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

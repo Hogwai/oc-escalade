@@ -30,5 +30,11 @@ public class UtilisateurDaoImpl extends BaseDao<Utilisateur> implements Utilisat
         this.getTransaction().commit();
         return user != null;
     }
+
+	@Override
+	public void registerUser(Utilisateur userToRegister) {
+		this.initEntityManager();
+		this.createOrUpdate(userToRegister);
+	}
 }
 

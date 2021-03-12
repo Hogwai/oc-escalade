@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SiteDao {
     List<Site> search(Site criteria);
+    List<Site> getAllSiteInfos();
 }
