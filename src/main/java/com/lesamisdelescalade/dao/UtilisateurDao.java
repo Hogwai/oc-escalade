@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface UtilisateurDao {
     List<Utilisateur> search(Utilisateur criteria);
-    Boolean isRegisteredUser(String userName, String password);
-    void registerUser(Utilisateur userToRegister);
+    Utilisateur isRegisteredUser(String userName, String password);
+    Utilisateur registerUser(Utilisateur userToRegister);
+    Utilisateur getById(Integer userId);
 }

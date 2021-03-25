@@ -2,7 +2,9 @@ package com.lesamisdelescalade.service;
 
 import java.util.Map;
 
+import com.lesamisdelescalade.model.Utilisateur;
+
 public interface UtilisateurService {
-	Boolean registerUser(Map<String, String> userInfos);
-	Boolean isRegisteredUser(String pseudo, String motDePasse);
+	Utilisateur registerUser(Map<String, String> userInfos);
+	Utilisateur isRegisteredUser(String pseudo, String motDePasse);
 }

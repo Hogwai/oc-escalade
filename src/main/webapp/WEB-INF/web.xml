@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee;http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	version="2.5">
+	
 	<display-name>lesamisdelescalade</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>/jsp/login.jsp</welcome-file>
 	</welcome-file-list>
 
 	<listener>
@@ -22,4 +20,23 @@
 		<param-name>contextClass</param-name>
 		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
 	</context-param>
+	
+	<!-- 
+	<servlet>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <servlet-class>
+			org.glassfish.jersey.servlet.ServletContainer
+        </servlet-class>
+        <init-param>
+             <param-name>config.property.packages</param-name>
+             <param-value>com.lesamisdelescalade.controller</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <url-pattern>/lesamisdelescalade/*</url-pattern>
+    </servlet-mapping>
+     -->
+	
 </web-app>

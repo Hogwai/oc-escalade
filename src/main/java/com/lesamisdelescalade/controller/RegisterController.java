@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lesamisdelescalade.enums.UserInfoConsts;
+import com.lesamisdelescalade.model.Utilisateur;
 import com.lesamisdelescalade.service.UtilisateurService;
 
 /**
@@ -77,14 +78,15 @@ public class RegisterController extends HttpServlet {
 		userInfos.put(UserInfoConsts.EMAIL, request.getParameter(UserInfoConsts.EMAIL));
 		userInfos.put(UserInfoConsts.NOM, request.getParameter(UserInfoConsts.NOM));
 		userInfos.put(UserInfoConsts.PRENOM, request.getParameter(UserInfoConsts.PRENOM));
-		if (Boolean.TRUE.equals(utilisateurService.registerUser(userInfos))) {
-			HttpSession session = request.getSession(true);
-			session.setAttribute(UserInfoConsts.PSEUDO, request.getParameter(UserInfoConsts.PSEUDO));
-			session.setAttribute(UserInfoConsts.PRENOM, request.getParameter(UserInfoConsts.PRENOM));
-
-			request.getRequestDispatcher("/site").forward(request, response);
+		userInfos.put(UserInfoConsts.MEMBREASSOYN, request.getParameter(UserInfoConsts.MEMBREASSOYN) == null ? "0" : "1");
+		Utilisateur userForSession = utilisateurService.registerUser(userInfos);
+        if (userForSession != null) {
+        	HttpSession session = request.getSession(true);
+			session.setAttribute(UserInfoConsts.UTILISATEUR, userForSession);
+			response.sendRedirect(request.getContextPath() + "/home");
 		} else {
-			throw new ServletException("Register not successful..");
+			request.setAttribute("registerError", "Veuillez remplir tous les champs.");
+			this.getServletContext().getRequestDispatcher("/jsp/register.jsp").forward(request, response);
 		}
     }
 }

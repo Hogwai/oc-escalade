@@ -6,6 +6,12 @@ import com.lesamisdelescalade.model.Secteur;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+@Repository("secteurDao")
+@Transactional
 public class SecteurDaoImpl extends BaseDao<Secteur> implements SecteurDao {
 
     public SecteurDaoImpl() {

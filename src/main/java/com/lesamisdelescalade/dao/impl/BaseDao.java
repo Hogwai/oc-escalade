@@ -32,21 +32,36 @@ public abstract class BaseDao<T extends Serializable> {
         return em.getTransaction();
     }
 
-    public void createOrUpdate(T obj) {
+    public T create(T obj) {
         EntityTransaction tx = this.getTransaction();
         tx.begin();
         em.persist(obj);
         tx.commit();
+        //em.close();
+        return obj;
     }
+    
+    public T update(T obj) {
+        EntityTransaction tx = this.getTransaction();
+        tx.begin();
+        em.merge(obj);
+        tx.commit();
+        //em.close();
+        return obj;
+    }
+    
+    
 
     public void delete(T obj) {
         EntityTransaction tx = this.getTransaction();
         tx.begin();
-        em.remove(obj);
+        em.remove(em.contains(obj) ? obj : em.merge(obj));
         tx.commit();
+        //em.close();
     }
 
     public T getById(Integer id) {
+    	this.initEntityManager();
         return em.find(modelClass, id);
     }
 

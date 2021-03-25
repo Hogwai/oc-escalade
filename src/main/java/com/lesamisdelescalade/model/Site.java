@@ -134,4 +134,9 @@ public class Site implements Serializable {
     public void setTopos(Collection<Topo> topos) {
         this.topos = topos;
     }
+    
+    @Override
+    public String toString() {
+        return "Site [id=" + id + "]";
+    }
 }

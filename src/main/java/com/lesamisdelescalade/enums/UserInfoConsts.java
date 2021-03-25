@@ -5,6 +5,7 @@ public class UserInfoConsts {
 		throw new IllegalStateException("Utility class");
 	}
 
+	public static final String UTILISATEUR = "utilisateur";
 	public static final String PSEUDO = "pseudo";
 	public static final String MOTDEPASSE = "motDePasse";
 	public static final String NOM = "nom";
@@ -13,4 +14,5 @@ public class UserInfoConsts {
 	public static final String EMAIL = "email";
 	public static final String ADRESSE = "adresse";
 	public static final String CODEPOSTAL = "codePostal";
+	public static final String MEMBREASSOYN = "membreAssoYN";
 }

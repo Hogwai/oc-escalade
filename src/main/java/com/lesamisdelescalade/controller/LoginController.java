@@ -4,6 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.lesamisdelescalade.enums.UserInfoConsts;
+import com.lesamisdelescalade.model.Utilisateur;
 import com.lesamisdelescalade.service.UtilisateurService;
 
 import javax.servlet.ServletException;
@@ -62,17 +65,19 @@ public class LoginController extends HttpServlet {
 
         if (username != null && !username.isEmpty() &&
                 (password != null && !password.isEmpty())) {
-            if (Boolean.TRUE.equals(utilisateurService.isRegisteredUser(username, password))) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute( "login", username);
-                session.setAttribute( "password", password);
-
-                //request.getRequestDispatcher("/site").forward(request, response);
-                //request.getRequestDispatcher("/jsp/showSite.jsp").forward(request, response);
-                response.sendRedirect(request.getContextPath() + "/site");
+        	Utilisateur userForSession = utilisateurService.isRegisteredUser(username, password);
+            if (userForSession != null) {
+            	HttpSession session = request.getSession(true);
+    			session.setAttribute(UserInfoConsts.UTILISATEUR, userForSession);
+                response.sendRedirect(request.getContextPath() + "/home");
             } else {
-                throw new ServletException("Login not successful..");
-            }
-        }
+				request.setAttribute("loginError",
+						"Le pseudo et/ou le mot de passe sont incorrects. Veuillez réessayer.");
+				this.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+			}
+		} else {
+			request.setAttribute("loginError", "Veuillez remplir tous les champs.");
+			this.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+		}
     }
 }

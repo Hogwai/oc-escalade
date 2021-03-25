@@ -1,6 +1,7 @@
 package com.lesamisdelescalade.dao.impl;
 
 import com.lesamisdelescalade.dao.SiteDao;
+import com.lesamisdelescalade.model.Commentaire;
 import com.lesamisdelescalade.model.Site;
 
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Repository;
 public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
     public SiteDaoImpl() {
         this.setmodelClass(Site.class);
+        this.initEntityManager();
     }
+    
 
     @Override
     public List<Site> search(Site criteria) {
@@ -24,7 +27,13 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
 
 	@Override
 	public List<Site> getAllSiteInfos() {
-		this.initEntityManager();
+		//this.initEntityManager();
 		return this.getAll();
 	}
+	
+	@Override
+    public void updateSite(Site site) {
+		//this.initEntityManager();
+    	this.update(site);
+    }
 }

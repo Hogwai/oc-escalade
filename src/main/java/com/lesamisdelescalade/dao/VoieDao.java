@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface VoieDao {
     List<Voie> search(Voie criteria);
+    Voie getById(Integer voieId);
 }

@@ -148,7 +148,7 @@ public class Utilisateur implements Serializable {
 		this.membreAssoYN = membreAssoYN;
 	}
 
-	@Override
+	/*@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -164,9 +164,9 @@ public class Utilisateur implements Serializable {
         if (!Objects.equals(email, that.email)) return false;
         if (!Objects.equals(pseudo, that.pseudo)) return false;
         return Objects.equals(motDePasse, that.motDePasse);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
@@ -178,7 +178,7 @@ public class Utilisateur implements Serializable {
         result = 31 * result + (pseudo != null ? pseudo.hashCode() : 0);
         result = 31 * result + (motDePasse != null ? motDePasse.hashCode() : 0);
         return result;
-    }
+    }*/
 
     @OneToMany(mappedBy = "utilisateur")
     public Collection<Commentaire> getCommentaires() {
@@ -205,5 +205,11 @@ public class Utilisateur implements Serializable {
 
     public void setToposEmprunteur(Collection<Topo> toposEmprunteur) {
         this.toposEmprunteur = toposEmprunteur;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return "League [id=" + id + ", name=" + nom + "-" + prenom + "]";
     }
 }

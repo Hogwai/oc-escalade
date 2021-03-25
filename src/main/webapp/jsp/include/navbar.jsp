@@ -1,16 +1,19 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Pierre Giraud</a>
-    <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false" role="button">Cours</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">HTML et CSS</a>
-                <a class="dropdown-item" href="#">JavaScript</a>
-                <a class="dropdown-item" href="#">PHP et MySQL</a>
-            </div>
+    <a class="navbar-brand" href="#">
+    	<img src="${pageContext.request.contextPath}/img/lesamisdelescalade_crop.png" width="40" height="25" alt="">
+    	Les Amis de l'Escalade
+   	</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown dropleft">
+			<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" >
+				<span class="bi bi-person-circle"></span> Utilisateur: ${utilisateur.pseudo}
+			</button>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="#">Espace personnel</a> 
+				<a class="dropdown-item" href="#">Listes des topos</a> 
+				<a class="dropdown-item" href="#">Gestion des réservations</a>
+				<a class="dropdown-item bi bi-box-arrow-left" href="/lesamisdelescalade/logout"> Se déconnecter</a>
+			</div>
         </li>
-        <li class="nav-item"><a class="nav-link " href="#">Articles</a></li>
-        <li class="nav-item"><a class="nav-link " href="#">Contact</a></li>
     </ul>
 </nav>

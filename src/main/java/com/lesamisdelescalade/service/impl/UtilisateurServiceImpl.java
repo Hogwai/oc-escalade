@@ -17,11 +17,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	private UtilisateurDao utilisateurDao;
     
     @Override
-	public Boolean registerUser(Map<String, String> userInfos) {
-    	Boolean registerOk = true;
+	public Utilisateur registerUser(Map<String, String> userInfos) {
     	for(Map.Entry<String, String> entry : userInfos.entrySet()) {
     		if(entry.getValue() == null || entry.getValue().isEmpty()){
-    			registerOk = false;
+    			return null;
     		}
     	}
 
@@ -34,18 +33,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     	userToRegister.setEmail(userInfos.get(UserInfoConsts.EMAIL));
     	userToRegister.setAdresse(userInfos.get(UserInfoConsts.ADRESSE));
     	userToRegister.setCodePostal(userInfos.get(UserInfoConsts.CODEPOSTAL));
-    	userToRegister.setMembreAssoYN(1);
-    	utilisateurDao.registerUser(userToRegister);
-    	return registerOk;
+    	userToRegister.setMembreAssoYN(Integer.valueOf(userInfos.get(UserInfoConsts.MEMBREASSOYN)));
+    	return utilisateurDao.registerUser(userToRegister);
     }
     
     @Override
-	public Boolean isRegisteredUser(String pseudo, String motDePasse) {
-        if (pseudo != null && !pseudo.isEmpty() &&
-                (motDePasse != null && !motDePasse.isEmpty())) {
-        	return utilisateurDao.isRegisteredUser(pseudo, motDePasse);
-        } else {
-        	return false;
-        }
+	public Utilisateur isRegisteredUser(String pseudo, String motDePasse) {
+    	return utilisateurDao.isRegisteredUser(pseudo, motDePasse);
     }
 }

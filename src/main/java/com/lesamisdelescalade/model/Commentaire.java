@@ -15,8 +15,20 @@ public class Commentaire implements Serializable {
     private String contenu;
     private Utilisateur utilisateur;
     private transient Site site;
+    
+    public Commentaire() {
+		super();
+	}
 
-    @Id
+	public Commentaire(int id, String contenu, Utilisateur utilisateur, Site site) {
+		super();
+		this.id = id;
+		this.contenu = contenu;
+		this.utilisateur = utilisateur;
+		this.site = site;
+	}
+
+	@Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
@@ -73,5 +85,10 @@ public class Commentaire implements Serializable {
 
     public void setSite(Site site) {
         this.site = site;
+    }
+    
+    @Override
+    public String toString() {
+        return "Commentaire [id=" + id + "]";
     }
 }
