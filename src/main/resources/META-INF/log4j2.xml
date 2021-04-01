@@ -7,27 +7,27 @@
     </Appenders>
     <Loggers>
         <Root level="error">
-            <AppenderRef ref="logfile"/>
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
     <Loggers>
         <Root level="warn">
-            <AppenderRef ref="logfile"/>
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
     <Loggers>
         <Root level="info">
-            <AppenderRef ref="logfile"/>
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
     <Loggers>
         <Root level="trace">
-            <AppenderRef ref="logfile"/>
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
     <Loggers>
         <Root level="debug">
-            <AppenderRef ref="logfile"/>
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
 </Configuration>

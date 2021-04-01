@@ -3,7 +3,6 @@ package com.lesamisdelescalade.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "utilisateur")

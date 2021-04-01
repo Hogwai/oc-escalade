@@ -1,8 +1,6 @@
 package com.lesamisdelescalade.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.lesamisdelescalade.enums.SitesConsts;
-import com.lesamisdelescalade.enums.UserInfoConsts;
 import com.lesamisdelescalade.model.Site;
-import com.lesamisdelescalade.model.Utilisateur;
 import com.lesamisdelescalade.service.CommentaireService;
 import com.lesamisdelescalade.service.SiteService;
 
@@ -63,21 +58,21 @@ public class SiteDetailsController extends HttpServlet {
     
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	Integer siteId = Integer.valueOf(request.getParameter("siteId"));
+    	Integer siteId = this.getSiteFromReq(request);
     	Site currentSite = siteService.getById(siteId);
 		request.setAttribute("currentSite", currentSite);
     	this.dispatchSiteDetailsPage(request, response);
 	}
     
     
-
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer siteId = Integer.valueOf(request.getParameter("siteId"));
+		Integer siteId = this.getSiteFromReq(request);
 		Integer tagValue = request.getParameter("tag") == null ? 0 : 1;
+		Site currentSite = siteService.getById(siteId);
+		
 		siteService.updateSiteTag(siteId, tagValue);
 		
-		Site currentSite = siteService.getById(siteId);
 		request.setAttribute("currentSite", currentSite);
 		this.redirectSiteDetailsPage(request, response, siteId);
 	}
@@ -107,6 +102,21 @@ public class SiteDetailsController extends HttpServlet {
 		} catch (IOException e){
             LOGGER.error(String.format("Error occurred: %s", e.toString()));
         }
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
+	private Integer getSiteFromReq(HttpServletRequest request) {
+		Integer siteId = null;
+    	try {
+    		siteId = Integer.valueOf(request.getParameter("siteId"));
+		} catch (NumberFormatException e) {
+			 LOGGER.error(String.format(PARSE_ERROR, e.toString()));
+		}
+    	return siteId;
 	}
 
 }

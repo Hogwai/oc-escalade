@@ -2,9 +2,6 @@ package com.lesamisdelescalade.dao.impl;
 
 import com.lesamisdelescalade.dao.CommentaireDao;
 import com.lesamisdelescalade.model.Commentaire;
-import com.lesamisdelescalade.model.Site;
-import com.lesamisdelescalade.model.Utilisateur;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Repository;
 public class CommentaireDaoImpl extends BaseDao<Commentaire> implements CommentaireDao {
     public CommentaireDaoImpl() {
         this.setmodelClass(Commentaire.class);
+        this.initEntityManager();
     }
 
     @Override
@@ -26,19 +24,18 @@ public class CommentaireDaoImpl extends BaseDao<Commentaire> implements Commenta
     
     @Override
     public void deleteComment(Commentaire commentToDelete) {
-    	this.initEntityManager();
     	this.delete(commentToDelete);
     }
     
 	@Override
     public void addComment(Commentaire commentaire) {
-		this.initEntityManager();
+		//this.initEntityManager();
     	this.create(commentaire);
     }
 	
 	@Override
     public void updateComment(Commentaire commentaire) {
-		this.initEntityManager();
+		//this.initEntityManager();
     	this.update(commentaire);
     }
 }

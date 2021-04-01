@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lesamisdelescalade.enums.SecteurConsts;
-import com.lesamisdelescalade.enums.SitesConsts;
+import com.lesamisdelescalade.enums.SiteConsts;
 import com.lesamisdelescalade.model.Secteur;
 import com.lesamisdelescalade.model.Site;
 import com.lesamisdelescalade.service.SecteurService;
@@ -70,7 +70,7 @@ public class SecteurDetailsController extends HttpServlet {
     	
     	Secteur currentSecteur = secteurService.getById(secteurId);
 		Site currentSite = siteService.getById(currentSecteur.getSite().getId());
-		request.setAttribute(SitesConsts.CURRENT_SITE, currentSite);
+		request.setAttribute(SiteConsts.CURRENT_SITE, currentSite);
 		request.setAttribute(SecteurConsts.CURRENT_SECTEUR, currentSecteur);
     	this.dispatchSecteurDetailsPage(request, response, currentSite.getId(), currentSecteur.getId());
 	}

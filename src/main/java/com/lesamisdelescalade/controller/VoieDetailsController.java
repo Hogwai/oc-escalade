@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lesamisdelescalade.enums.SecteurConsts;
-import com.lesamisdelescalade.enums.SitesConsts;
+import com.lesamisdelescalade.enums.SiteConsts;
 import com.lesamisdelescalade.enums.VoieConsts;
 import com.lesamisdelescalade.model.Secteur;
 import com.lesamisdelescalade.model.Site;
@@ -85,7 +85,7 @@ public class VoieDetailsController extends HttpServlet {
 		Site currentSite = currentVoie.getSecteur().getSite();
 		request.setAttribute(VoieConsts.CURRENT_VOIE, currentVoie);
 		request.setAttribute(SecteurConsts.CURRENT_SECTEUR, currentSecteur);
-		request.setAttribute(SitesConsts.CURRENT_SITE, currentSite);
+		request.setAttribute(SiteConsts.CURRENT_SITE, currentSite);
     	this.dispatchSecteurDetailsPage(request, response);
 	}
 

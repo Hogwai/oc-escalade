@@ -27,8 +27,8 @@
 						<h2>404 Not Found</h2>
 						<div class="error-details">Une erreur est survenue: la page démandée n'existe pas.</div>
 						<div class="error-actions">
-							<a href="/site" class="btn btn-primary btn-lg">
-								<span class="glyphicon glyphicon-home"></span> Retour à l'accueil 
+							<a href="${pageContext.request.contextPath}/home" class="btn btn-primary btn-lg">
+								<span class="bi bi-home"></span> Retour à l'accueil 
 							</a>
 						</div>
 						<!-- /.error-actions -->

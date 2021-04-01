@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lesamisdelescalade.criteria.SearchSiteCriteria;
 import com.lesamisdelescalade.dao.SiteDao;
 import com.lesamisdelescalade.model.Site;
 import com.lesamisdelescalade.service.SiteService;
@@ -42,6 +43,11 @@ public class SiteServiceImpl implements SiteService {
 		Site siteToUpdate = siteDao.getById(siteId);
 		siteToUpdate.setTagYN(tag.byteValue());
 		this.siteDao.updateSite(siteToUpdate);
+	}
+
+	@Override
+	public List<Site> search(SearchSiteCriteria criteria) {
+		return this.siteDao.search(criteria);
 	}
 
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CotationDao {
     List<Cotation> search(Cotation criteria);
+    List<Cotation> getAllCotationInfos();
 }
