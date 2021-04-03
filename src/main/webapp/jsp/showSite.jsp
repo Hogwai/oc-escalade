@@ -25,7 +25,7 @@
 			<jsp:include page='include/navbar.jsp'/>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item active" aria-current="page">Liste des sites</li>
+					<li class="breadcrumb-item active" aria-current="page">Accueil</li>
 				</ol>
 			</nav>
 					

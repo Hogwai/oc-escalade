@@ -7,32 +7,31 @@ public class SearchSiteCriteria {
 	private Float hauteur;
 	private Integer tagYN;
 	private String ville;
-	private String pays;
 	
 	// Secteur
-	private Integer nbSecteurStart;
-	private Integer nbSecteurEnd;
+	private Integer nbSecteurMax;
 	
-	// Topo
-	private Integer nbTopoStart;
-	private Integer nbTopoEnd;
+	// Voie
+	private Integer nbVoieMax;
 	
 	// Cotation
-	private Integer cotationId;
+	private Integer nbLongueurMax;
+		
+	// Topo
+	private Integer nbTopoMax;
+	
 
-	public SearchSiteCriteria(String libelle, Float hauteur, Integer tagYN, String ville, String pays,
-			Integer nbSecteurStart, Integer nbSecteurEnd, Integer nbTopoStart, Integer nbTopoEnd, Integer cotationId) {
+	public SearchSiteCriteria(String libelle, Float hauteur, Integer tagYN, String ville,
+			Integer nbSecteurMax, Integer nbVoieMax, Integer nbLongueurMax, Integer nbTopoMax) {
 		super();
 		this.libelle = libelle;
 		this.hauteur = hauteur;
 		this.tagYN = tagYN;
-		this.ville = ville;
-		this.pays = pays;
-		this.nbSecteurStart = nbSecteurStart;
-		this.nbSecteurEnd = nbSecteurEnd;
-		this.nbTopoStart = nbTopoStart;
-		this.nbTopoEnd = nbTopoEnd;
-		this.cotationId = cotationId;
+		this.ville = ville;;
+		this.nbSecteurMax = nbSecteurMax;
+		this.nbVoieMax = nbVoieMax;
+		this.nbLongueurMax = nbLongueurMax;
+		this.nbTopoMax = nbTopoMax;
 	}
 
 	public String getLibelle() {
@@ -66,58 +65,41 @@ public class SearchSiteCriteria {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
-
-	public String getPays() {
-		return pays;
-	}
-
-	public void setPays(String pays) {
-		this.pays = pays;
-	}
-
-	public Integer getNbSecteurStart() {
-		return nbSecteurStart;
-	}
-
-	public void setNbSecteurStart(Integer nbSecteurStart) {
-		this.nbSecteurStart = nbSecteurStart;
-	}
-
-	public Integer getNbSecteurEnd() {
-		return nbSecteurEnd;
-	}
-
-	public void setNbSecteurEnd(Integer nbSecteurEnd) {
-		this.nbSecteurEnd = nbSecteurEnd;
-	}
-
-	public Integer getNbTopoStart() {
-		return nbTopoStart;
-	}
-
-	public void setNbTopoStart(Integer nbTopoStart) {
-		this.nbTopoStart = nbTopoStart;
-	}
-
-	public Integer getNbTopoEnd() {
-		return nbTopoEnd;
-	}
-
-	public void setNbTopoEnd(Integer nbTopoEnd) {
-		this.nbTopoEnd = nbTopoEnd;
-	}
-
-	public Integer getCotationId() {
-		return cotationId;
-	}
-
-	public void setCotationId(Integer cotationId) {
-		this.cotationId = cotationId;
-	}
 	
+	public Integer getNbSecteurMax() {
+		return nbSecteurMax;
+	}
+
+	public void setNbSecteurMax(Integer nbSecteurMax) {
+		this.nbSecteurMax = nbSecteurMax;
+	}
+
+	public Integer getNbTopoMax() {
+		return nbTopoMax;
+	}
+
+	public void setNbTopoMax(Integer nbTopoMax) {
+		this.nbTopoMax = nbTopoMax;
+	}
+
+	public Integer getNbLongueurMax() {
+		return nbLongueurMax;
+	}
+
+	public void setNbLongueurMax(Integer nbLongueurMax) {
+		this.nbLongueurMax = nbLongueurMax;
+	}
+
+	public Integer getNbVoieMax() {
+		return nbVoieMax;
+	}
+
+	public void setNbVoieMax(Integer nbVoieMax) {
+		this.nbVoieMax = nbVoieMax;
+	}
+
 	public Boolean isNull() {
 		return this.libelle == null && this.hauteur == null && this.tagYN == null && this.ville == null
-				&& this.pays == null && this.nbSecteurStart == null && this.nbSecteurEnd == null
-				&& this.nbTopoStart == null && this.nbTopoEnd == null && this.cotationId == null;
+				&& this.nbSecteurMax == null && this.nbTopoMax == null && this.nbLongueurMax == null;
 	}
 }

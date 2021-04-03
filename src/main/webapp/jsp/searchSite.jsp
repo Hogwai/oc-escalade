@@ -26,7 +26,7 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item active">
-						<a href="/lesamisdelescalade/home">Liste des sites</a>
+						<a href="/lesamisdelescalade/home">Accueil</a>
 					</li>
 					<li class="breadcrumb-item active" aria-current="page">
 						<a href="${request.requestURL}">Recherche de sites</a>
@@ -39,79 +39,49 @@
 					<form class="my-2 px-3 pt-3 border rounded" action="${pageContext.request.contextPath}/recherchesite" method="POST">
 					    <div class="form-row">
 					        <div class="col-6 form-group">
-					            <label class="sr-only" for="libelle">Libellé du site</label>
+					            <label for="libelle">Libellé du site</label>
 					            <input class="form-control" id="libelle" type="text" placeholder="Nom du site" name="libelle">
 					            
 					        </div>				
+    				        <div class="col-6 form-group">
+				                <label for="hauteur">Hauteur maximale (mètres)</label>
+				                <input class="form-control" id="hauteur" type="number" placeholder="Hauteur maximale" name="hauteur" min="0">
+				            </div>
 					    </div>
-				        <h6>Filtrer par : </h6>
 				        <div class="form-row">
-				            <div class="col-auto form-group custom-control custom-checkbox pl-2 ml-4">
-				                <input type="checkbox" class="custom-control-input" id="tag" name="tag" value="tag" />
-				                <label class="custom-control-label" for="tag">Officiel "Les amis de l&#039escalade"</label>
-				            </div>
-				        </div>
-				
-				        <div class="form-row">
-				            <div class="col-auto form-group">
-				                <label for="departmentId">Departement</label>
-				                <select class="form-control" id="departmentId" type="text" name="departmentId">
-				                    <option value="" >(non renseigné)</option>
-				                    <option value="1">01 - ain</option>
-				                </select>
-				            </div>
-				        </div>
-				
-				        <div class="form-row">
-				            <div class="col-auto form-group">
-				                <label for="cotation">Difficulté</label>
-				                <select class="form-control" id="cotation" type="text" name="cotation">
+				        	<div class="col-6 form-group">
+				                <label for="ville">Ville</label>
+				                <select class="custom-select form-control" id="ville" type="text" name="ville">
 				                	<option value=""></option>
-				                	<c:forEach var="cotation" items="${cotations}" >
-					                    <option value="${cotation.id}">${cotation.libelle}</option>
+				                	<c:forEach var="vp" items="${villePays}" >
+					                    <option value="${vp.key}">${vp.key} - ${vp.value}</option>
 				                    </c:forEach>
 				                </select>
 				            </div>
-				
-				            <div class="col-auto form-group">
-				                <label for="siteTypeId">Type du site</label>
-				                <select class="form-control" id="siteTypeId" type="text" name="siteTypeId">
-				                	<option value=""></option>
-				                </select>
+				            <div class="col-6 form-group">
+				            	<div class="custom-control custom-checkbox mt-5">
+				                <input type="checkbox" class="custom-control-input" id="tagYN" name="tagYN" />
+				                <label class="custom-control-label" for="tagYN">Officiel "Les amis de l&#039escalade"</label>
+				                </div>
+				            </div>
+				        </div>
+						<hr class="solid">
+				        <div class="form-row">
+							<div class="col-6 form-group">
+				                <label for="nbSecteurs">Nombre maximal de secteurs</label>
+				                <input class="form-control" id="nbSecteurs" type="number" placeholder="Nombre de secteurs" name="nbSecteurs" min="1">
+				            </div>
+				            <div class="col-6 form-group">
+				                <label for="nbVoies">Nombre maximal de voies</label>
+				                <input class="form-control" id="nbVoies" type="number" placeholder="Nombre de voies" name="nbVoies" min="1">
 				            </div>
 				        </div>
 				
 				        <div class="form-row">
-				            <div class="col-6 form-group">
-				                <label for="levelGroupId">Niveau recommandé</label>
-				                <select class="form-control" id="levelGroupId" type="text" name="levelGroupId">
-				                    <option value="">(non renseigné)</option>
-				                    <option value="1">Débutants (suffisamment de voies de 3a à 5c)</option>
-				                    <option value="2">Amateurs (suffisamment de voies de 6a à 6c)</option>
-				                    <option value="3">Confirmés (suffisamment de voies de 7a à 7c)</option>
-				                    <option value="4">Pros (suffisamment de voies de 8a à 9c)</option>
-				                </select>
+							<div class="col-6 form-group">
+				                <label for="nbLongueurs">Nombre maximal de longueurs</label>
+				                <input class="form-control" id="nbLongueurs" type="number" placeholder="Nombre de longueurs" name="nbLongueurs" min="1">
 				            </div>
-				
-				            <div class="col-3 form-group" >
-				                <label for="routesNumberId">Nombre de voies</label>
-				                <select class="form-control" id="routesNumberId" type="text" name="routesNumberId">
-				                    <option value="">(non renseigné)</option>
-				                    <option value="1">Moins de 10 voies</option>
-				                    <option value="2">Entre 10 et 25 voies</option>
-				                    <option value="3">Entre 25 et 50 voies</option>
-				                    <option value="4">Entre 50 et 100 voies</option>
-				                    <option value="5">Entre 100 et 200 voies</option>
-				                    <option value="6">Entre 200 et 500 voies</option>
-				                    <option value="7">Plus de 500 voies</option>
-				                </select>
-				            </div>
-				
-				            <div class="col-3 form-group">
-				                <label for="minRouteHeight">Hauteur minimum (en m)</label>
-				                <input class="form-control" id="minRouteHeight" type="text" placeholder="Hauteur minimum en mètre" value="minRouteHeight" name="minRouteHeight">
-				            </div>
-
 				        </div>
 			            <button class="btn btn-primary btn-lg btn-block mb-2" type="submit">Rechercher</button>
 					</form>
@@ -130,6 +100,9 @@
 								<th scope="col">Officiel "Les Amis de l'Escalade"</th>
 								<th scope="col">Ville</th>
 								<th scope="col">Pays</th>
+								<th scope="col">Secteurs</th>
+								<th scope="col">Voies</th>
+								<th scope="col">Longueurs</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -141,6 +114,9 @@
 									<td>${site.tagYN eq 1 ? "Oui"  : "Non"} </td>
 									<td>${site.ville}</td>
 									<td>${site.pays}</td>
+									<td>${fn:length(site.secteurs)}</td>
+									<td>${site.sumOfVoies()}</td>
+									<td>${site.sumOfLongueurs()}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

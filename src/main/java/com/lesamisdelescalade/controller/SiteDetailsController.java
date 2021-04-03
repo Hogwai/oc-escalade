@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lesamisdelescalade.enums.SiteConsts;
 import com.lesamisdelescalade.model.Site;
 import com.lesamisdelescalade.service.CommentaireService;
 import com.lesamisdelescalade.service.SiteService;
@@ -68,7 +69,7 @@ public class SiteDetailsController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer siteId = this.getSiteFromReq(request);
-		Integer tagValue = request.getParameter("tag") == null ? 0 : 1;
+		Integer tagValue = request.getParameter(SiteConsts.TAG) == null ? 0 : 1;
 		Site currentSite = siteService.getById(siteId);
 		
 		siteService.updateSiteTag(siteId, tagValue);

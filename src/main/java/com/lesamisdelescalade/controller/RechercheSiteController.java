@@ -61,7 +61,8 @@ public class RechercheSiteController extends HttpServlet {
 
     
 	public void setDropdownValues(HttpServletRequest request) {
-		request.setAttribute(CotationConsts.COTATIONS, cotationService.getAllCotationInfos());
+		//request.setAttribute(CotationConsts.COTATIONS, cotationService.getAllCotationInfos());
+		request.setAttribute(SiteConsts.VILLE_PAYS, siteService.getAllVillePays());
 	}
 	
 	
@@ -79,9 +80,17 @@ public class RechercheSiteController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.setDropdownValues(request);
-		SearchSiteCriteria criteria = new SearchSiteCriteria(request.getParameter(SiteConsts.LIBELLE), null, null, null,
-				null, null, null, null, null, null);
+		
+		String libelle = request.getParameter(SiteConsts.LIBELLE).isEmpty() ? null
+				: request.getParameter(SiteConsts.LIBELLE);
+		Float hauteur = request.getParameter(SiteConsts.HAUTEUR).isEmpty() ? null
+				: Float.valueOf(request.getParameter(SiteConsts.HAUTEUR));
+		Integer tagValue = request.getParameter(SiteConsts.TAG) == null ? 0 : 1;
+		String ville = request.getParameter(SiteConsts.VILLE).isEmpty() ? null : request.getParameter(SiteConsts.VILLE);
+		Integer nbSecteurMax = request.getParameter(SiteConsts.NB_SECTEURS).isEmpty() ? null
+				: Integer.valueOf(request.getParameter(SiteConsts.NB_SECTEURS));
+		
+		SearchSiteCriteria criteria = new SearchSiteCriteria(libelle, hauteur, tagValue, ville, nbSecteurMax, null, null, null);
 		List<Site> sitesResult = siteService.search(criteria);
 		request.setAttribute(SiteConsts.SITES, sitesResult);
 		this.dispatchSearchSitePage(request, response);
@@ -91,6 +100,7 @@ public class RechercheSiteController extends HttpServlet {
 
 	
 	private void dispatchSearchSitePage(HttpServletRequest request, HttpServletResponse response) {
+		this.setDropdownValues(request);
 		try {
             this.getServletContext().getRequestDispatcher("/jsp/searchSite.jsp")
                     .forward(request, response);

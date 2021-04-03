@@ -14,7 +14,7 @@ public class Site implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
     private String libelle;
-    private Double hauteur;
+    private Float hauteur;
     private Byte tagYN;
     private String ville;
     private String pays;
@@ -44,11 +44,11 @@ public class Site implements Serializable {
 
     @Basic
     @Column(name = "hauteur")
-    public Double getHauteur() {
+    public Float getHauteur() {
         return hauteur;
     }
 
-    public void setHauteur(Double hauteur) {
+    public void setHauteur(Float hauteur) {
         this.hauteur = hauteur;
     }
 
@@ -139,4 +139,22 @@ public class Site implements Serializable {
     public String toString() {
         return "Site [id=" + id + "]";
     }
+    
+    public Integer sumOfVoies() {
+    	Integer nbVoies = 0;
+    	for (Secteur secteur : this.secteurs) {
+    		nbVoies += secteur.getVoies().size();
+    	}
+    	return nbVoies;
+    }
+    
+	public Integer sumOfLongueurs() {
+		Integer nbLongueurs = 0;
+		for (Secteur secteur : this.secteurs) {
+			for (Voie voie : secteur.getVoies()) {
+				nbLongueurs += voie.getLongueurs().size();
+			}
+		}
+		return nbLongueurs;
+	}
 }

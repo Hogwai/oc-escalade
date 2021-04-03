@@ -12,4 +12,5 @@ public interface SiteService {
 	Site getById(Integer siteId);
 	void updateSiteTag(Integer siteId, Integer tag);
 	List<Site> search(SearchSiteCriteria criteria);
+	Map<String, String> getAllVillePays();
 }

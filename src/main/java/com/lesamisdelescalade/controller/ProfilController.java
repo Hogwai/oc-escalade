@@ -96,8 +96,8 @@ public class ProfilController extends HttpServlet {
 	 */
 	public void modifyTopo(HttpServletRequest request) {
     	Integer topoId = getTopoFromReq(request);
-		Integer statutTopoTag = Integer.valueOf(request.getParameter(StatutTopoConsts.STATUT)) == StatutTopoConsts.DISPONIBLE ? StatutTopoConsts.INDISPONIBLE
-				: StatutTopoConsts.DISPONIBLE;
+		Integer statutTopoTag = Integer.valueOf(request.getParameter(StatutTopoConsts.STATUT))
+				.equals(StatutTopoConsts.DISPONIBLE) ? StatutTopoConsts.INDISPONIBLE : StatutTopoConsts.DISPONIBLE;
 		topoService.updateTopo(topoId, statutTopoTag);
 	}
 	

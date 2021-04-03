@@ -49,5 +49,10 @@ public class SiteServiceImpl implements SiteService {
 	public List<Site> search(SearchSiteCriteria criteria) {
 		return this.siteDao.search(criteria);
 	}
+	
+	@Override
+	public Map<String, String> getAllVillePays(){
+		return this.siteDao.getAllVillePays();
+	}
 
 }
