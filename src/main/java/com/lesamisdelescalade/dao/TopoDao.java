@@ -15,4 +15,8 @@ public interface TopoDao {
 	void updateTopo(Topo topo);
 
 	Topo getById(Integer topoId);
+
+	List<Topo> getToposByEmprunteurStatut(Utilisateur user, Integer statut);
+
+	List<Topo> getToposByStatut(Integer statut);
 }

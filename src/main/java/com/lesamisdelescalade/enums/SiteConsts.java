@@ -18,11 +18,10 @@ public class SiteConsts {
 	
 	public static final String NB_SECTEURS = "nbSecteurs";
 	public static final String SECTEURS = "secteurs";
-	/*public static final String MOTDEPASSE = "motDePasse";
-	public static final String NOM = "nom";
-	public static final String PRENOM = "prenom";
-	public static final String NUMTEL = "numTel";
-	public static final String EMAIL = "email";
-	public static final String ADRESSE = "adresse";
-	public static final String CODEPOSTAL = "codePostal";*/
+	
+	public static final String NB_VOIES= "nbVoies";
+	public static final String VOIES = "voies";
+	
+	public static final String NB_LONGUEURS= "nbLongueurs";
+	public static final String LONGUEURS = "longueur";
 }

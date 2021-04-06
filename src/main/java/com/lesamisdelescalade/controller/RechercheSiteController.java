@@ -8,10 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-/*import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;*/
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,10 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lesamisdelescalade.criteria.SearchSiteCriteria;
-import com.lesamisdelescalade.enums.CotationConsts;
 import com.lesamisdelescalade.enums.SiteConsts;
 import com.lesamisdelescalade.model.Site;
-import com.lesamisdelescalade.service.CotationService;
 import com.lesamisdelescalade.service.SiteService;
 
 /**
@@ -35,16 +29,13 @@ public class RechercheSiteController extends HttpServlet {
 	protected static final Logger LOGGER = LogManager.getLogger(RechercheSiteController.class);
        
 	private static SiteService siteService;
-	private static CotationService cotationService;
-	
 	public RechercheSiteController() {}
 
 	@SuppressWarnings("static-access")
 	@Autowired
-    public RechercheSiteController(SiteService siteService, CotationService cotationService) {
+    public RechercheSiteController(SiteService siteService) {
         super();
         this.siteService = siteService;
-        this.cotationService = cotationService;
     }
     
     @SuppressWarnings("static-access")
@@ -52,16 +43,10 @@ public class RechercheSiteController extends HttpServlet {
     public void setSiteService(SiteService siteService) {
     	this.siteService = siteService;
     }
-    
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setCotationService(CotationService cotationService) {
-    	this.cotationService = cotationService;
-    }
+   
 
     
 	public void setDropdownValues(HttpServletRequest request) {
-		//request.setAttribute(CotationConsts.COTATIONS, cotationService.getAllCotationInfos());
 		request.setAttribute(SiteConsts.VILLE_PAYS, siteService.getAllVillePays());
 	}
 	
@@ -81,21 +66,32 @@ public class RechercheSiteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String libelle = request.getParameter(SiteConsts.LIBELLE).isEmpty() ? null
-				: request.getParameter(SiteConsts.LIBELLE);
+		String libelle = getParamStrFromReq(request, SiteConsts.LIBELLE);
+		String ville = getParamStrFromReq(request, SiteConsts.VILLE);
+
+		Integer nbSecteurMax = getParamIntFromReq(request, SiteConsts.NB_SECTEURS);
+		Integer nbVoieMax = getParamIntFromReq(request, SiteConsts.NB_VOIES);
+		Integer nbLongueurMax = getParamIntFromReq(request, SiteConsts.NB_LONGUEURS);
+
 		Float hauteur = request.getParameter(SiteConsts.HAUTEUR).isEmpty() ? null
 				: Float.valueOf(request.getParameter(SiteConsts.HAUTEUR));
 		Integer tagValue = request.getParameter(SiteConsts.TAG) == null ? 0 : 1;
-		String ville = request.getParameter(SiteConsts.VILLE).isEmpty() ? null : request.getParameter(SiteConsts.VILLE);
-		Integer nbSecteurMax = request.getParameter(SiteConsts.NB_SECTEURS).isEmpty() ? null
-				: Integer.valueOf(request.getParameter(SiteConsts.NB_SECTEURS));
-		
-		SearchSiteCriteria criteria = new SearchSiteCriteria(libelle, hauteur, tagValue, ville, nbSecteurMax, null, null, null);
+
+		SearchSiteCriteria criteria = new SearchSiteCriteria(libelle, hauteur, tagValue, ville, nbSecteurMax, nbVoieMax,
+				nbLongueurMax, null);
 		List<Site> sitesResult = siteService.search(criteria);
 		request.setAttribute(SiteConsts.SITES, sitesResult);
 		this.dispatchSearchSitePage(request, response);
 	}
 	
+	
+	private String getParamStrFromReq(HttpServletRequest request, String parameter) {
+		return request.getParameter(parameter).isEmpty() ? null : request.getParameter(parameter);
+	}
+	
+	private Integer getParamIntFromReq(HttpServletRequest request, String parameter) {
+		return request.getParameter(parameter).isEmpty() ? null : Integer.valueOf(request.getParameter(parameter));
+	}
 	
 
 	

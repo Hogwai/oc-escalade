@@ -13,7 +13,7 @@
 			</button>
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="${pageContext.request.contextPath}/profil">Espace personnel</a> 
-				<a class="dropdown-item" href="#">Listes des topos</a> 
+				<a class="dropdown-item" href="${pageContext.request.contextPath}/listetopos">Listes des topos</a> 
 				<a class="dropdown-item" href="#">Gestion des réservations</a>
 				<a class="dropdown-item bi bi-box-arrow-left" href="${pageContext.request.contextPath}/logout"> Se déconnecter</a>
 			</div>

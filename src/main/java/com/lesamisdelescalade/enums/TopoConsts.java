@@ -14,8 +14,10 @@ public class TopoConsts {
 	public static final String TOPO_TAG = "topoTag";
 	public static final String TOPO_ID = "topoId";
 	public static final String MODIFY = "modify";
+	public static final String CANCEL = "cancel";
 	
-	
+	public static final String TOPOS_EN_ATTENTE = "toposEnAttente";
+	public static final String TOPOS_DISPONIBLES= "toposDisponibles";
 	/*public static final String MOTDEPASSE = "motDePasse";
 	public static final String NOM = "nom";
 	public static final String PRENOM = "prenom";

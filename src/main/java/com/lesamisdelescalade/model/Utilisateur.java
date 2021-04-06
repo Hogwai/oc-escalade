@@ -205,10 +205,4 @@ public class Utilisateur implements Serializable {
     public void setToposEmprunteur(Collection<Topo> toposEmprunteur) {
         this.toposEmprunteur = toposEmprunteur;
     }
-    
-    
-    @Override
-    public String toString() {
-        return "League [id=" + id + ", name=" + nom + "-" + prenom + "]";
-    }
 }

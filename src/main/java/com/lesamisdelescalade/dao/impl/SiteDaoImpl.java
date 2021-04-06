@@ -5,6 +5,7 @@ import com.lesamisdelescalade.dao.SiteDao;
 import com.lesamisdelescalade.enums.SiteConsts;
 import com.lesamisdelescalade.model.Secteur;
 import com.lesamisdelescalade.model.Site;
+import com.lesamisdelescalade.model.Voie;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,41 +60,47 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
     @Override
     public List<Site> search(SearchSiteCriteria criteria) {
     	CriteriaBuilder critBuilder = this.em.getCriteriaBuilder();
-    	CriteriaQuery<Site> critQuery = critBuilder.createQuery(Site.class);
-    	Root<Site> siteRoot = critQuery.from(Site.class);
+    	CriteriaQuery<Site> critQuerySite = critBuilder.createQuery(Site.class);
+    	Root<Site> siteRoot = critQuerySite.from(Site.class);
     	List<Predicate> conditions = new ArrayList<>();
     	
-    	critQuery.select(siteRoot);
+    	critQuerySite.select(siteRoot);
     	
-    	// Predicates
+		// Predicates
 		if (criteria.getLibelle() != null) {
 			conditions.add(critBuilder.like(siteRoot.<String>get(SiteConsts.LIBELLE), "%" + criteria.getLibelle() + "%"));
 		}
-		
+
 		if (criteria.getHauteur() != null) {
 			ParameterExpression<Float> hauteur = critBuilder.parameter(Float.class, SiteConsts.HAUTEUR);
-			conditions.add(critBuilder.lessThanOrEqualTo(siteRoot.<Float> get(SiteConsts.HAUTEUR), hauteur));
+			conditions.add(critBuilder.lessThanOrEqualTo(siteRoot.<Float>get(SiteConsts.HAUTEUR), hauteur));
 		}
-		
+
 		if (criteria.getTagYN() != null) {
 			ParameterExpression<Byte> tag = critBuilder.parameter(Byte.class, SiteConsts.TAG);
-			conditions.add(critBuilder.equal(siteRoot.<Byte> get(SiteConsts.TAG), tag));
+			conditions.add(critBuilder.equal(siteRoot.<Byte>get(SiteConsts.TAG), tag));
 		}
-		
+
 		if (criteria.getVille() != null) {
 			ParameterExpression<String> ville = critBuilder.parameter(String.class, SiteConsts.VILLE);
-			conditions.add(critBuilder.equal(siteRoot.<String> get(SiteConsts.VILLE), ville));
+			conditions.add(critBuilder.equal(siteRoot.<String>get(SiteConsts.VILLE), ville));
+		}
+
+		if (criteria.getNbSecteurMax() != null) {
+			ParameterExpression<Integer> nbSecteur = critBuilder.parameter(Integer.class, SiteConsts.SECTEURS);
+			conditions.add(critBuilder.lessThanOrEqualTo(
+					critBuilder.size(siteRoot.<Collection<Secteur>>get(SiteConsts.SECTEURS)), nbSecteur));
 		}
 		
-		if (criteria.getNbSecteurMax() != null) {
-			//ParameterExpression<Integer> nbSecteur = critBuilder.parameter(Integer.class, SiteConsts.SECTEUR);
-			ParameterExpression<Integer> nbSecteur = critBuilder.parameter(Integer.class, SiteConsts.SECTEURS);
-			//conditions.add(critBuilder.lessThanOrEqualTo(siteRoot.<Integer> get(SiteConsts.SECTEUR), nbSecteur));
-			conditions.add(critBuilder.lessThanOrEqualTo(critBuilder.size(siteRoot.<Collection<Secteur>> get(SiteConsts.SECTEURS)), nbSecteur));
+
+		if (criteria.getNbVoieMax() != null) {
+			ParameterExpression<Integer> nbVoie = critBuilder.parameter(Integer.class, SiteConsts.VOIES);
+			conditions.add(critBuilder.lessThanOrEqualTo(
+					critBuilder.size(siteRoot.<Collection<Secteur>>get(SiteConsts.SECTEURS).<Collection<Voie>>get(SiteConsts.VOIES)), nbVoie));
 		}
-    	
-		critQuery.where(conditions.toArray(new Predicate[] {}));
-    	TypedQuery<Site> query = this.em.createQuery(critQuery);
+
+		critQuerySite.where(conditions.toArray(new Predicate[] {}));
+    	TypedQuery<Site> query = this.em.createQuery(critQuerySite);
     	
     	// Parameters
     	if (criteria.getHauteur() != null) {
@@ -110,6 +117,10 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
     	
     	if (criteria.getNbSecteurMax() != null) {
     		query.setParameter(SiteConsts.SECTEURS, criteria.getNbSecteurMax());
+    	}
+    	
+    	if (criteria.getNbVoieMax() != null) {
+    		query.setParameter(SiteConsts.VOIES, criteria.getNbVoieMax());
     	}
         return query.getResultList();
     }

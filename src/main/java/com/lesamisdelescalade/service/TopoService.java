@@ -17,4 +17,10 @@ public interface TopoService {
 
 	void addTopo(String nom, String description, Integer topoTag, Utilisateur currentUser, Integer siteId);
 
+	List<Topo> getToposByEmprunteurStatut(Utilisateur user, Integer statut);
+
+	void updateTopoEmprunteurStatut(Utilisateur user, Integer topoId, Integer statutTopoTag);
+
+	List<Topo> getBookableTopos(Utilisateur user);
+
 }
