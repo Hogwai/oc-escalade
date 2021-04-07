@@ -77,8 +77,8 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
 		}
 
 		if (criteria.getTagYN() != null) {
-			ParameterExpression<Byte> tag = critBuilder.parameter(Byte.class, SiteConsts.TAG);
-			conditions.add(critBuilder.equal(siteRoot.<Byte>get(SiteConsts.TAG), tag));
+			ParameterExpression<Byte> tag = critBuilder.parameter(Byte.class, SiteConsts.TAG_YN);
+			conditions.add(critBuilder.equal(siteRoot.<Byte>get(SiteConsts.TAG_YN), tag));
 		}
 
 		if (criteria.getVille() != null) {
@@ -108,7 +108,7 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
     	}
     	
     	if (criteria.getTagYN() != null) {
-    		query.setParameter(SiteConsts.TAG, criteria.getTagYN().byteValue());
+    		query.setParameter(SiteConsts.TAG_YN, criteria.getTagYN().byteValue());
     	}
     	
     	if (criteria.getVille() != null) {

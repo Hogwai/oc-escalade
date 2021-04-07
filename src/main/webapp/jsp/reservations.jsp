@@ -29,7 +29,7 @@
 						<a href="/lesamisdelescalade/home">Accueil</a>
 					</li>
 					<li class="breadcrumb-item active" aria-current="page">
-						<a href="${request.requestURL}">Liste des topos</a>
+						<a href="${request.requestURL}">Gestion des réservations</a>
 					</li>
 				</ol>
 			</nav>
@@ -37,15 +37,51 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<table class="table table-hover table-bordered">
-						<caption>Vos réservations</caption>
+						<caption>Demandes de réservation sur vos topos</caption>
 						<thead>
 							<tr>
 								<th scope="col">Nom</th>
 								<th scope="col">Description</th>
 								<th scope="col">Date de parution</th>
 								<th scope="col">Site concerné</th>
-								<th scope="col">Propriétaire</th>
 								<th scope="col">Statut de la demande</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="topo" items="${toposAccept}" >
+								<tr>
+									<th scope="row">${topo.nom}</th>
+									<td>${topo.description}</td>
+									<td><fmt:formatDate value="${topo.dateParution}" pattern="dd/MM/yyyy" /></td>
+									<td>${topo.site.libelle}</td>
+									<td>${topo.statutTopo.libelle}</td>
+									<td>
+										<a href="reservations?accept=${topo.id}" class="btn btn-success">
+											Accepter
+										</a>
+										<a href="reservations?refuse=${topo.id}" class="btn btn-danger">
+											Refuser
+										</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					
+				</div>
+				<!-- /.col-lg-12 -->
+				<div class="col-lg-12">
+					<table class="table table-hover table-bordered">
+						<caption>Demandes de réservation acceptés</caption>
+						<thead>
+							<tr>
+								<th scope="col">Nom</th>
+								<th scope="col">Description</th>
+								<th scope="col">Date de parution</th>
+								<th scope="col">Site concerné</th>
+								<th scope="col">Statut de la demande</th>
+								<th scope="col">Emprunteur</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
@@ -56,14 +92,14 @@
 									<td>${topo.description}</td>
 									<td><fmt:formatDate value="${topo.dateParution}" pattern="dd/MM/yyyy" /></td>
 									<td>${topo.site.libelle}</td>
-									<td>${topo.proprietaire.prenom} ${topo.proprietaire.nom}</td>
 									<td>${topo.statutTopo.libelle}</td>
+									<td>${topo.emprunteur.prenom} ${topo.emprunteur.nom}</td>
 									<td>
 										<!-- Button trigger modal -->
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#topo${topo.id}">
-										  Afficher les coordonnées
+										  	Afficher les coordonnées
 										</button>
-										<a href="listetopos?cancel=${topo.id}" class="btn btn-danger">
+										<a href="reservations?refuse=${topo.id}" class="btn btn-danger">
 											Mettre fin à ce prêt
 										</a>
 									</td>
@@ -72,79 +108,12 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="col-lg-12">
-					<table class="table table-hover table-bordered">
-						<caption>Vos demandes de réservation de topos</caption>
-						<thead>
-							<tr>
-								<th scope="col">Nom</th>
-								<th scope="col">Description</th>
-								<th scope="col">Date de parution</th>
-								<th scope="col">Site concerné</th>
-								<th scope="col">Propriétaire</th>
-								<th scope="col">Statut de la demande</th>
-								<th scope="col"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="topo" items="${toposEnAttente}" >
-								<tr>
-									<th scope="row">${topo.nom}</th>
-									<td>${topo.description}</td>
-									<td><fmt:formatDate value="${topo.dateParution}" pattern="dd/MM/yyyy" /></td>
-									<td>${topo.site.libelle}</td>
-									<td>${topo.proprietaire.prenom} ${topo.proprietaire.nom}</td>
-									<td>${topo.statutTopo.libelle}</td>
-									<td>
-										<a href="listetopos?cancel=${topo.id}" class="btn btn-danger">
-											Annuler cette demande de réservation
-										</a>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<!-- /.col-lg-12 -->
 				<hr class="solid">
-				
-				<div class="col-lg-12">
-					<table class="table table-hover table-bordered">
-						<caption>Topos disponibles</caption>
-						<thead>
-							<tr>
-								<th scope="col">Nom</th>
-								<th scope="col">Description</th>
-								<th scope="col">Date de parution</th>
-								<th scope="col">Site concerné</th>
-								<th scope="col">Propriétaire</th>
-								<th scope="col"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="topo" items="${toposDisponibles}" >
-								<tr>
-									<th scope="row">${topo.nom}</th>
-									<td>${topo.description}</td>
-									<td><fmt:formatDate value="${topo.dateParution}" pattern="dd/MM/yyyy" /></td>
-									<td>${topo.site.libelle}</td>
-									<td>${topo.proprietaire.prenom} ${topo.proprietaire.nom}</td>
-									<td>
-										<a href="listetopos?modify=${topo.id}" class="btn btn-primary">
-											Faire une demande de réservation
-										</a>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
 			
+			<!-- modals -->
 			<c:forEach var="topo" items="${toposReserves}" >
-				<!-- Modal -->
 				<div class="modal fade" id="topo${topo.id}" role="dialog" aria-labelledby="topo${topo.id}Label" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
@@ -155,11 +124,11 @@
 				        </button>
 				      </div>
 				      <div class="modal-body">
-				      	<p>Nom: ${topo.proprietaire.nom}</p>
-				      	<p>Prénom: ${topo.proprietaire.prenom}</p>
-				      	<p>Téléphone: ${topo.proprietaire.numeroTel}</p>
-				      	<p>Adresse: ${topo.proprietaire.adresse} ${topo.proprietaire.codePostal}</p>
-				      	<p>Email: ${topo.proprietaire.email}</p>
+				      	<p>Nom: ${topo.emprunteur.nom}</p>
+				      	<p>Prénom: ${topo.emprunteur.prenom}</p>
+				      	<p>Téléphone: ${topo.emprunteur.numeroTel}</p>
+				      	<p>Adresse: ${topo.emprunteur.adresse} ${topo.emprunteur.codePostal}</p>
+				      	<p>Email: ${topo.emprunteur.email}</p>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -168,6 +137,7 @@
 				  </div>
 				</div>
 			</c:forEach>
+			<!-- /.modals -->
 		</div>
 		<!-- /.container -->
 	

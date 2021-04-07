@@ -19,4 +19,6 @@ public interface TopoDao {
 	List<Topo> getToposByEmprunteurStatut(Utilisateur user, Integer statut);
 
 	List<Topo> getToposByStatut(Integer statut);
+
+	List<Topo> getToposByProprietaireStatut(Utilisateur user, Integer statut);
 }

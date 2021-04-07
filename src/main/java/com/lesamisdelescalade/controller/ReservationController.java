@@ -26,10 +26,10 @@ import com.lesamisdelescalade.service.TopoService;
  * Servlet implementation class ListeToposController
  */
 @Component
-@WebServlet("/listetopos")
-public class ListeToposController extends HttpServlet {
+@WebServlet("/reservations")
+public class ReservationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected static final Logger LOGGER = LogManager.getLogger(ListeToposController.class);
+	protected static final Logger LOGGER = LogManager.getLogger(ReservationController.class);
 	
 	private static final String PARSE_ERROR = "Error occurred during string parsing: %s";
        
@@ -41,11 +41,11 @@ public class ListeToposController extends HttpServlet {
 	private static TopoService topoService;
 	
 	
-	public ListeToposController() {}
+	public ReservationController() {}
 
 	@SuppressWarnings("static-access")
 	@Autowired
-    public ListeToposController(SiteService siteService, TopoService topoService) {
+    public ReservationController(SiteService siteService, TopoService topoService) {
         super();
         this.siteService = siteService;
         this.topoService = topoService;
@@ -64,15 +64,12 @@ public class ListeToposController extends HttpServlet {
     	this.topoService = topoService;
     }
 
-    private void setListeToposRequest(HttpServletRequest request, Utilisateur currentUser) {
-		List<Topo> toposEnAttente = topoService.getToposByEmprunteurStatut(currentUser,
+    private void setListeToposRequest(HttpServletRequest request, Utilisateur currentUser) {	
+		List<Topo> toposAccept = topoService.getToposByProprietaireStatut(currentUser,
 				StatutTopoConsts.EN_ATTENTE);
-		List<Topo> toposDisponibles = topoService.getBookableTopos(currentUser);
-		List<Topo> toposReserves = topoService.getToposByEmprunteurStatut(currentUser,
-				StatutTopoConsts.INDISPONIBLE);
-
-		request.setAttribute(TopoConsts.TOPOS_EN_ATTENTE, toposEnAttente);
-		request.setAttribute(TopoConsts.TOPOS_DISPONIBLES, toposDisponibles);
+		List<Topo> toposReserves = topoService.getBookedToposByProprietaire(currentUser);
+		
+		request.setAttribute(TopoConsts.TOPOS_ACCEPT, toposAccept);
 		request.setAttribute(TopoConsts.TOPOS_RESERVES, toposReserves);
     }
     
@@ -80,17 +77,17 @@ public class ListeToposController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utilisateur currentUser = (Utilisateur) request.getSession().getAttribute(UserInfoConsts.UTILISATEUR);
 		
-		if (request.getParameter(TopoConsts.MODIFY) != null) {
-			this.bookTopo(request, currentUser);
+		if (request.getParameter(TopoConsts.ACCEPT) != null) {
+			this.acceptTopoBooking(request);
 			this.setListeToposRequest(request, currentUser);
-			this.redirectListeToposPage(request, response);
-		} else if (request.getParameter(TopoConsts.CANCEL) != null) {
-			this.cancelTopoBooking(request);
+			this.redirectReservationPage(request, response);
+		} else if (request.getParameter(TopoConsts.REFUSE) != null) {
+			this.refuseTopoBooking(request);
 			this.setListeToposRequest(request, currentUser);
-			this.redirectListeToposPage(request, response);
+			this.redirectReservationPage(request, response);
 		} else {
 			this.setListeToposRequest(request, currentUser);
-			this.dispatchListeToposPage(request, response);
+			this.dispatchReservationPage(request, response);
 		}
 	}
     
@@ -100,9 +97,9 @@ public class ListeToposController extends HttpServlet {
      * @param request
      * @param currentUser
      */
-    public void cancelTopoBooking(HttpServletRequest request) {
-    	Integer topoId = getTopoFromReq(request, TopoConsts.CANCEL);
-    	topoService.updateTopoEmprunteurStatut(null, topoId, StatutTopoConsts.DISPONIBLE);
+    public void acceptTopoBooking(HttpServletRequest request) {
+    	Integer topoId = getTopoFromReq(request, TopoConsts.ACCEPT);
+    	topoService.updateTopo(topoId, StatutTopoConsts.INDISPONIBLE);
     }
     
     /**
@@ -110,9 +107,9 @@ public class ListeToposController extends HttpServlet {
      * @param request
      * @param currentUser
      */
-	public void bookTopo(HttpServletRequest request, Utilisateur currentUser) {
-    	Integer topoId = getTopoFromReq(request, TopoConsts.MODIFY);
-		topoService.updateTopoEmprunteurStatut(currentUser, topoId, StatutTopoConsts.EN_ATTENTE);
+	public void refuseTopoBooking(HttpServletRequest request) {
+    	Integer topoId = getTopoFromReq(request, TopoConsts.REFUSE);
+		topoService.updateTopoEmprunteurStatut(null, topoId, StatutTopoConsts.DISPONIBLE);
 	}
 
 	/**
@@ -120,9 +117,9 @@ public class ListeToposController extends HttpServlet {
 	 * @param request
 	 * @param response
 	 */
-	private void dispatchListeToposPage(HttpServletRequest request, HttpServletResponse response) {
+	private void dispatchReservationPage(HttpServletRequest request, HttpServletResponse response) {
 		try {
-            this.getServletContext().getRequestDispatcher("/jsp/listeTopos.jsp")
+            this.getServletContext().getRequestDispatcher("/jsp/reservations.jsp")
                     .forward(request, response);
         } catch (ServletException | IOException e){
             LOGGER.error(String.format("Error occurred: %s", e.toString()));
@@ -133,9 +130,9 @@ public class ListeToposController extends HttpServlet {
 	 * @param request
 	 * @param response
 	 */
-	private void redirectListeToposPage(HttpServletRequest request, HttpServletResponse response) {
+	private void redirectReservationPage(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			response.sendRedirect(request.getContextPath() + "/listetopos");
+			response.sendRedirect(request.getContextPath() + "/reservations");
 		} catch (IOException e){
             LOGGER.error(String.format("Error occurred: %s", e.toString()));
         }

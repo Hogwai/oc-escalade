@@ -93,7 +93,7 @@
 									<td>${topo.description}</td>
 									<td><fmt:formatDate value="${topo.dateParution}" pattern="dd/MM/yyyy" /></td>
 									<td>${topo.statutTopo.libelle}</td>
-									<td>${topo.emprunteur eq null ? "Non" : topo.emprunteur}</td>
+									<td>${topo.emprunteur eq null ? "Non" : topo.emprunteur.nom.concat(' ').concat(topo.emprunteur.prenom)}</td>
 									<td>${topo.site.libelle}</td>
 									<td>
 										<a href="profil?modify=${topo.id}&statut=${topo.statutTopo.id}" class="btn ${topo.statutTopo.id eq 1 ? 'btn-danger' : 'btn-success' }">

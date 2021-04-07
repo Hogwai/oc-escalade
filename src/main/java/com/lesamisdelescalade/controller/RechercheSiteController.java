@@ -75,7 +75,7 @@ public class RechercheSiteController extends HttpServlet {
 
 		Float hauteur = request.getParameter(SiteConsts.HAUTEUR).isEmpty() ? null
 				: Float.valueOf(request.getParameter(SiteConsts.HAUTEUR));
-		Integer tagValue = request.getParameter(SiteConsts.TAG) == null ? 0 : 1;
+		Integer tagValue = request.getParameter(SiteConsts.TAG_YN) == null ? 0 : 1;
 
 		SearchSiteCriteria criteria = new SearchSiteCriteria(libelle, hauteur, tagValue, ville, nbSecteurMax, nbVoieMax,
 				nbLongueurMax, null);

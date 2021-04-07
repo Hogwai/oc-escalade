@@ -56,6 +56,13 @@ public class TopoDaoImpl extends BaseDao<Topo> implements TopoDao {
     }
     
     @Override
+    public List<Topo> getToposByProprietaireStatut(Utilisateur user, Integer statut){
+    	List<Topo> toposByProprietaire = this.getToposByProprietaire(user);
+    	toposByProprietaire.removeIf(topo -> topo.getStatutTopo().getId() != statut);
+    	return toposByProprietaire;
+    }
+    
+    @Override
     public List<Topo> getToposByStatut(Integer statut){
     	List<Topo> topos = this.getAllTopoInfos();
     	topos.removeIf(topo -> topo.getStatutTopo().getId() != statut);

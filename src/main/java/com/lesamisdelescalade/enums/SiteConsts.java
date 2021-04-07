@@ -11,7 +11,7 @@ public class SiteConsts {
 	
 	public static final String LIBELLE = "libelle";
 	public static final String HAUTEUR = "hauteur";
-	public static final String TAG = "tagYN";
+	public static final String TAG_YN = "tagYN";
 	public static final String VILLE = "ville";
 	public static final String PAYS = "pays";
 	public static final String VILLE_PAYS = "villePays";

@@ -23,4 +23,8 @@ public interface TopoService {
 
 	List<Topo> getBookableTopos(Utilisateur user);
 
+	List<Topo> getToposByProprietaireStatut(Utilisateur user, Integer statut);
+
+	List<Topo> getBookedToposByProprietaire(Utilisateur user);
+
 }

@@ -41,10 +41,10 @@
 			                	<input type="hidden" id="siteId" name="siteId" value="${currentSite.id}">
 			                	<div class="form-group">
 			                		<div class="custom-control custom-checkbox">
-										<input type="checkbox" id="tag" name="tag" 
-												value="tag" class="custom-control-input" ${currentSite.tagYN eq 1 ? "checked='checked'"  : ""} 
+										<input type="checkbox" id="tagYN" name="tagYN" 
+												value="tagYN" class="custom-control-input" ${currentSite.tagYN eq 1 ? "checked='checked'"  : ""} 
 												onchange="document.getElementById('modifyTag').submit()"/> 
-										<label class="custom-control-label" for="tag">Officiel "Les amis de l&#039escalade"</label>
+										<label class="custom-control-label" for="tagYN">Officiel "Les amis de l&#039escalade"</label>
 									</div>	
 	                    		</div>
 			                </form>

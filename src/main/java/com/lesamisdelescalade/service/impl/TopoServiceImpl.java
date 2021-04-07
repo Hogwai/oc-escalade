@@ -82,6 +82,19 @@ public class TopoServiceImpl implements TopoService {
 	}
 	
 	@Override
+	public List<Topo> getToposByProprietaireStatut(Utilisateur user, Integer statut){
+		return this.topoDao.getToposByProprietaireStatut(user, statut);
+	}
+	
+	@Override
+	public List<Topo> getBookedToposByProprietaire(Utilisateur user){
+		List<Topo> bookedTopos = this.topoDao.getToposByProprietaireStatut(user, StatutTopoConsts.INDISPONIBLE);
+		bookedTopos.removeIf(topo -> topo.getEmprunteur() == null);
+		return bookedTopos;
+	}
+	
+	
+	@Override
 	public List<Topo> getBookableTopos(Utilisateur user){
 		List<Topo> bookablesTopos = this.topoDao.getToposByStatut(StatutTopoConsts.DISPONIBLE);
 		bookablesTopos.removeIf(topo -> topo.getProprietaire().getId() == user.getId());
