@@ -3,9 +3,9 @@ package com.lesamisdelescalade.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.lesamisdelescalade.enums.UserInfoConsts;
+import com.lesamisdelescalade.consts.UserInfoConsts;
 import com.lesamisdelescalade.model.Utilisateur;
 import com.lesamisdelescalade.service.UtilisateurService;
 
@@ -14,33 +14,30 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@Component
+/**
+ * Servlet implementation class LoginController
+ */
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
     protected static final Logger LOGGER = LogManager.getLogger(LoginController.class);
     private static final long serialVersionUID = 1L;
-
-	private static UtilisateurService utilisateurService;
-	
-	public LoginController() {}
-	
-	@SuppressWarnings("static-access")
-	@Autowired
-    public LoginController(UtilisateurService utilisateurService) {
-        super();
-        this.utilisateurService = utilisateurService;
-    }
     
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setUtilisateurService(UtilisateurService utilisateurService) {
-    	this.utilisateurService = utilisateurService;
-    }
+    private static final String LOGIN_JSP = "/jsp/login.jsp";
 
+    @Autowired
+	private UtilisateurService utilisateurService;
+	
+	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	}
+	
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
-            this.getServletContext().getRequestDispatcher("/jsp/login.jsp")
+            this.getServletContext().getRequestDispatcher(LOGIN_JSP)
                     .forward(request, response);
         } catch (ServletException | IOException e){
             LOGGER.error(String.format("Error occurred: %s", e.toString()));
@@ -73,11 +70,11 @@ public class LoginController extends HttpServlet {
             } else {
 				request.setAttribute("loginError",
 						"Le pseudo et/ou le mot de passe sont incorrects. Veuillez réessayer.");
-				this.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+				this.getServletContext().getRequestDispatcher(LOGIN_JSP).forward(request, response);
 			}
 		} else {
 			request.setAttribute("loginError", "Veuillez remplir tous les champs.");
-			this.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+			this.getServletContext().getRequestDispatcher(LOGIN_JSP).forward(request, response);
 		}
     }
 }

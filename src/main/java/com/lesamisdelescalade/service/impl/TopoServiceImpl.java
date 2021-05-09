@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lesamisdelescalade.consts.StatutTopoConsts;
 import com.lesamisdelescalade.dao.SiteDao;
 import com.lesamisdelescalade.dao.StatutTopoDao;
 import com.lesamisdelescalade.dao.TopoDao;
-import com.lesamisdelescalade.enums.StatutTopoConsts;
 import com.lesamisdelescalade.model.Site;
 import com.lesamisdelescalade.model.StatutTopo;
 import com.lesamisdelescalade.model.Topo;

@@ -1,29 +1,28 @@
 package com.lesamisdelescalade.dao.impl;
 
-import com.lesamisdelescalade.criteria.SearchSiteCriteria;
-import com.lesamisdelescalade.dao.SiteDao;
-import com.lesamisdelescalade.enums.SiteConsts;
-import com.lesamisdelescalade.model.Secteur;
-import com.lesamisdelescalade.model.Site;
-import com.lesamisdelescalade.model.Voie;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
-
 import org.springframework.stereotype.Repository;
+
+import com.lesamisdelescalade.consts.SiteConsts;
+import com.lesamisdelescalade.criteria.SearchSiteCriteria;
+import com.lesamisdelescalade.dao.SiteDao;
+import com.lesamisdelescalade.model.Secteur;
+import com.lesamisdelescalade.model.Site;
+import com.lesamisdelescalade.model.Voie;
 
 @Repository("siteDao")
 @Transactional
@@ -35,13 +34,11 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
     
 	@Override
 	public List<Site> getAllSiteInfos() {
-		//this.initEntityManager();
 		return this.getAll();
 	}
 	
 	@Override
     public void updateSite(Site site) {
-		//this.initEntityManager();
     	this.update(site);
     }
 	
@@ -49,11 +46,8 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
 	@Override
 	public Map<String, String> getAllVillePays() {
 		Map<String, String> villePaysMap = new HashMap<>();
-		Query q = this.em.createQuery("select distinct s.ville, s.pays from Site s");
-		List<Object[]> results = q.getResultList();
-		for (Object[] result : results) {
-			villePaysMap.put((String) result[0], (String) result[1]);
-		}
+		List<Object[]> results = this.em.createQuery("select distinct s.ville, s.pays from Site s").getResultList();
+		results.forEach(result -> villePaysMap.put((String) result[0], (String) result[1]));
 		return villePaysMap;
 	}
 
@@ -64,7 +58,7 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
     	Root<Site> siteRoot = critQuerySite.from(Site.class);
     	List<Predicate> conditions = new ArrayList<>();
     	
-    	critQuerySite.select(siteRoot);
+    	critQuerySite.select(siteRoot).distinct(true);
     	
 		// Predicates
 		if (criteria.getLibelle() != null) {
@@ -91,14 +85,16 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
 			conditions.add(critBuilder.lessThanOrEqualTo(
 					critBuilder.size(siteRoot.<Collection<Secteur>>get(SiteConsts.SECTEURS)), nbSecteur));
 		}
-		
 
 		if (criteria.getNbVoieMax() != null) {
 			ParameterExpression<Integer> nbVoie = critBuilder.parameter(Integer.class, SiteConsts.VOIES);
-			conditions.add(critBuilder.lessThanOrEqualTo(
-					critBuilder.size(siteRoot.<Collection<Secteur>>get(SiteConsts.SECTEURS).<Collection<Voie>>get(SiteConsts.VOIES)), nbVoie));
+			Join<Site, Secteur> secteurJoin = siteRoot.join(SiteConsts.SECTEURS);
+			//secteurJoin.
+			conditions.add(critBuilder
+					.lessThanOrEqualTo(critBuilder.size(secteurJoin.<Collection<Voie>>get(SiteConsts.VOIES)), nbVoie));
 		}
 
+		// Query
 		critQuerySite.where(conditions.toArray(new Predicate[] {}));
     	TypedQuery<Site> query = this.em.createQuery(critQuerySite);
     	

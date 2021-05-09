@@ -1,4 +1,4 @@
-package com.lesamisdelescalade.enums;
+package com.lesamisdelescalade.consts;
 
 public class VoieConsts {
 	private VoieConsts() {
@@ -7,6 +7,8 @@ public class VoieConsts {
 
 	public static final String VOIES = "voies";
 	public static final String CURRENT_VOIE = "currentVoie";
+	public static final String EQUIPEE_YN = "equipeeYN";
+	public static final String VOIE_ID = "voieId";
 	/*public static final String MOTDEPASSE = "motDePasse";
 	public static final String NOM = "nom";
 	public static final String PRENOM = "prenom";

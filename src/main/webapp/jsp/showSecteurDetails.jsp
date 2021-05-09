@@ -36,6 +36,14 @@
 			
 			<div class="row">
 				<div class="col-lg-12">
+					<div class="card mb-3">
+	       				<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addVoie">
+						  	Ajouter une voie
+						</button>
+					</div>
+					<!-- /.card mb-3 -->
+					
 					<div class="row">
 						<c:forEach var="voie" items="${currentSecteur.voies}" >
 						    <div class="col-lg-3 col-md-6 mb-4">
@@ -72,6 +80,51 @@
 				<!-- /.col-lg-9 -->
 			</div>
 			<!-- /.row -->
+			
+			<!-- modal -->
+			<div class="modal fade" id="addVoie" role="dialog" aria-labelledby="addVoieLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="addVoieLabel">Ajouter une voie</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form action="${pageContext.request.contextPath}/secteur?addVoie" method="POST">
+								<div class="form-row">
+									<div class="col-12 form-group">
+						            	<div class="custom-control custom-checkbox">
+							                <input type="checkbox" class="custom-control-input" id="equipeeYN" name="equipeeYN" />
+							                <label class="custom-control-label" for="equipeeYN">Voie équipée</label>
+				                		</div>
+			                		</div>
+										
+					               	<div class="col-12 form-group">
+					               		<label for="cotation">Cotation</label>
+						                <select class="custom-select form-control" id="cotation" type="text" name="cotation">
+						                	<c:forEach var="cotation" items="${cotations}" >
+							                    <option value="${cotation.id}">${cotation.libelle}</option>
+						                    </c:forEach>
+						                </select>
+						                <input type="hidden" id="secteurId" name="secteurId" value="${currentSecteur.id}">
+					                </div>
+								</div>
+								<button class="btn btn-primary btn-lg btn-block" type="submit">
+									Enregistrer
+								</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Fermer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal -->
 		</div>
 		<!-- /.container -->
 	

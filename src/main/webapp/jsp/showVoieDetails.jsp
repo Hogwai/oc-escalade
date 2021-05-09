@@ -38,38 +38,32 @@
 			</nav>
 			
 			<div class="row">
-				<div class="col-lg-3">
-					<h1 class="my-4">Category</h1>
-					<div class="list-group">
-						<a href="#" class="list-group-item">Category 1</a> <a href="#"
-							class="list-group-item">Category 2</a> <a href="#"
-							class="list-group-item">Category 3</a>
+				<div class="col-lg-12">
+					<div class="card mb-3">
+	       				<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLongueur">
+						  	Ajouter une longueur
+						</button>
 					</div>
-				</div>
-				<!-- /.col-lg-3 -->
-				<div class="col-lg-9">
+					<!-- /.card mb-3 -->
+					
 					<div class="row">
 						<c:forEach var="longueur" items="${currentVoie.longueurs}" >
-						    <div class="col-lg-4 col-md-6 mb-4">
+						    <div class="col-lg-3 col-md-6 mb-4">
 								<div class="card h-100">
-									<a href="#">
-										<img class="card-img-top" src="http://placehold.it/700x400" alt="">
-									</a>
 									<div class="card-body">
 										<h4 class="card-title">
-											<a href="/lesamisdelescalade/longueur?longueurId=${longueur.id}">Longueur: <c:out value="${longueur.id}" /></a>
+											Longueur: <c:out value="${longueur.id}" />
 										</h4>
-									<p class="card-text">
-										Cotation: <c:out value="${longueur.cotation.libelle}" />
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" id="relai" class="custom-control-input" ${longueur.relaiYN eq 1 ? "checked='checked'"  : ""} disabled /> 
-											<label class="custom-control-label" for="relai">Relai</label>
-										</div>
-									</p>
+										<p class="card-text">
+											Cotation: <c:out value="${longueur.cotation.libelle}" />
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" id="relai" class="custom-control-input" ${longueur.relaiYN eq 1 ? "checked='checked'"  : ""} disabled /> 
+												<label class="custom-control-label" for="relai">Relai</label>
+											</div>
+										</p>
 									</div>
 									<div class="card-footer">
-										<small class="text-muted">&#9733; &#9733; &#9733;
-											&#9733; &#9734;</small>
 									</div>
 									<!-- /.card-footer -->
 								</div>
@@ -81,9 +75,54 @@
 					</div>
 					<!-- /.row -->
 				</div>
-				<!-- /.col-lg-9 -->
+				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
+			
+			<!-- modal -->
+			<div class="modal fade" id="addLongueur" role="dialog" aria-labelledby="addLongueurLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="addLongueurLabel">Ajouter une longueur</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form action="${pageContext.request.contextPath}/voie?addLongueur" method="POST">
+								<div class="form-row">
+									<div class="col-12 form-group">
+						            	<div class="custom-control custom-checkbox">
+							                <input type="checkbox" class="custom-control-input" id="relaiYN" name="relaiYN" />
+							                <label class="custom-control-label" for="relaiYN">Longueur avec relai</label>
+				                		</div>
+			                		</div>
+										
+					               	<div class="col-12 form-group">
+					               		<label for="cotation">Cotation</label>
+						                <select class="custom-select form-control" id="cotation" type="text" name="cotation">
+						                	<c:forEach var="cotation" items="${cotations}" >
+							                    <option value="${cotation.id}">${cotation.libelle}</option>
+						                    </c:forEach>
+						                </select>
+						                <input type="hidden" id="voieId" name="voieId" value="${currentVoie.id}">
+					                </div>
+								</div>
+								<button class="btn btn-primary btn-lg btn-block" type="submit">
+									Enregistrer
+								</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Fermer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal -->
 		</div>
 		<!-- /.container -->
 	

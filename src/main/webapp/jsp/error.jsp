@@ -21,10 +21,10 @@
 		<div class="container">
 			<jsp:include page='include/navbar.jsp'/>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-12 d-flex flex-column justify-content-center align-items-center text-white vh-100">
 					<div class="error-template">
-						<h1>Oops!</h1>
-						<h2>404 Not Found</h2>
+						<h1>404</h1>
+						<h2>Page non trouvée</h2>
 						<div class="error-details">Une erreur est survenue: la page démandée n'existe pas.</div>
 						<div class="error-actions">
 							<a href="${pageContext.request.contextPath}/home" class="btn btn-primary btn-lg">

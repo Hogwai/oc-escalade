@@ -1,6 +1,7 @@
 package com.lesamisdelescalade.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,58 +11,43 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.lesamisdelescalade.enums.SiteConsts;
+import com.lesamisdelescalade.consts.SecteurConsts;
+import com.lesamisdelescalade.consts.SiteConsts;
 import com.lesamisdelescalade.model.Site;
-import com.lesamisdelescalade.service.CommentaireService;
+import com.lesamisdelescalade.service.SecteurService;
 import com.lesamisdelescalade.service.SiteService;
 
 /**
  * Servlet implementation class SiteDetailsController
  */
-@Component
 @WebServlet("/site")
 public class SiteDetailsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected static final Logger LOGGER = LogManager.getLogger(SiteDetailsController.class);
+	private static final Logger LOGGER = LogManager.getLogger(SiteDetailsController.class);
 	
 	private static final String PARSE_ERROR = "Error occurred during string parsing: %s";
+	private static final String ERROR = "Error occurred: %s";
        
-	@SuppressWarnings("unused")
-	private static SiteService siteService;
+	@Autowired
+	private SiteService siteService;
 	
-	@SuppressWarnings("unused")
-	private static CommentaireService commentaireService;
+	@Autowired
+	private SecteurService secteurService;
 	
-	public SiteDetailsController() {}
-
-	@SuppressWarnings("static-access")
-	@Autowired
-    public SiteDetailsController(SiteService siteService, CommentaireService commentaireService) {
-        super();
-        this.siteService = siteService;
-        this.commentaireService = commentaireService;
-    }
-    
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setSiteService(SiteService siteService) {
-    	this.siteService = siteService;
-    }
-    
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setCommentaireService(CommentaireService commentaireService) {
-    	this.commentaireService = commentaireService;
-    }
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	}
 
     
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Integer siteId = this.getSiteFromReq(request);
     	Site currentSite = siteService.getById(siteId);
-		request.setAttribute("currentSite", currentSite);
+		request.setAttribute(SiteConsts.CURRENT_SITE, currentSite);
     	this.dispatchSiteDetailsPage(request, response);
 	}
     
@@ -69,12 +55,14 @@ public class SiteDetailsController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer siteId = this.getSiteFromReq(request);
-		Integer tagValue = request.getParameter(SiteConsts.TAG_YN) == null ? 0 : 1;
-		Site currentSite = siteService.getById(siteId);
+		if (request.getQueryString().equals(SiteConsts.MODIFY_TAG)) {
+			Integer tagValue = request.getParameter(SiteConsts.TAG_YN) == null ? 0 : 1;
+			siteService.updateSiteTag(siteId, tagValue);
+		} else {
+			String libelleSecteur = request.getParameter(SecteurConsts.LIBELLE_SECTEUR);
+			secteurService.addSecteur(libelleSecteur, siteId);
+		}
 		
-		siteService.updateSiteTag(siteId, tagValue);
-		
-		request.setAttribute("currentSite", currentSite);
 		this.redirectSiteDetailsPage(request, response, siteId);
 	}
 
@@ -88,7 +76,7 @@ public class SiteDetailsController extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/jsp/showSiteDetails.jsp")
                     .forward(request, response);
         } catch (ServletException | IOException e){
-            LOGGER.error(String.format("Error occurred: %s", e.toString()));
+            LOGGER.error(String.format(ERROR, e.toString()));
         }
 	}
 	
@@ -98,11 +86,15 @@ public class SiteDetailsController extends HttpServlet {
 	 * @param response
 	 */
 	private void redirectSiteDetailsPage(HttpServletRequest request, HttpServletResponse response, Integer siteId) {
-		try {
-			response.sendRedirect(request.getContextPath() + "/site?siteId=" + siteId.toString());
-		} catch (IOException e){
-            LOGGER.error(String.format("Error occurred: %s", e.toString()));
-        }
+		if(siteId != null) {
+			try {
+				response.sendRedirect(request.getContextPath() + "/site?siteId=" + siteId.toString());
+			} catch (IOException e){
+	            LOGGER.error(String.format(ERROR, e.toString()));
+	        }
+		} else {
+			this.getServletContext().getRequestDispatcher("/jsp/error.jsp");
+		}
 	}
 	
 	/**

@@ -1,7 +1,7 @@
 package com.lesamisdelescalade.dao.impl;
 
+import com.lesamisdelescalade.consts.TopoConsts;
 import com.lesamisdelescalade.dao.TopoDao;
-import com.lesamisdelescalade.enums.TopoConsts;
 import com.lesamisdelescalade.model.Topo;
 import com.lesamisdelescalade.model.Utilisateur;
 

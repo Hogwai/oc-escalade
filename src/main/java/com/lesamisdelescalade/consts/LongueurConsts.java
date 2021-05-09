@@ -1,12 +1,14 @@
-package com.lesamisdelescalade.enums;
+package com.lesamisdelescalade.consts;
 
-public class CotationConsts {
-	private CotationConsts() {
+public class LongueurConsts {
+	private LongueurConsts() {
 		throw new IllegalStateException("Utility class");
 	}
 
-	public static final String COTATIONS = "cotations";
-	//public static final String CURRENT_SITE = "currentSite";
+	public static final String LONGUEURS = "voies";
+	public static final String CURRENT_LONGUEUR = "currentVoie";
+	public static final String RELAI_YN = "relaiYN";
+	public static final String LONGUEUR_ID = "voieId";
 	/*public static final String MOTDEPASSE = "motDePasse";
 	public static final String NOM = "nom";
 	public static final String PRENOM = "prenom";

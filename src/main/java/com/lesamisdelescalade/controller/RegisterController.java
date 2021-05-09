@@ -13,37 +13,29 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.lesamisdelescalade.enums.UserInfoConsts;
+import com.lesamisdelescalade.consts.UserInfoConsts;
 import com.lesamisdelescalade.model.Utilisateur;
 import com.lesamisdelescalade.service.UtilisateurService;
 
 /**
  * Servlet implementation class RegisterController
  */
-@Component
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
 	protected static final Logger LOGGER = LogManager.getLogger(RegisterController.class);
 	private static final long serialVersionUID = 1L;
 	
-	private static UtilisateurService utilisateurService;
-	
-	public RegisterController() {}
-	
-	@SuppressWarnings("static-access")
 	@Autowired
-    public RegisterController(UtilisateurService utilisateurService) {
-        super();
-        this.utilisateurService = utilisateurService;
-    }
-    
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setUtilisateurService(UtilisateurService utilisateurService) {
-    	this.utilisateurService = utilisateurService;
-    }
+	private UtilisateurService utilisateurService;
+	
+	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	}
        
     
 	@Override

@@ -18,6 +18,7 @@ public class Voie implements Serializable {
     private Secteur secteur;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

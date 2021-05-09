@@ -1,4 +1,4 @@
-package com.lesamisdelescalade.enums;
+package com.lesamisdelescalade.consts;
 
 public class SiteConsts {
 	private SiteConsts() {
@@ -24,4 +24,6 @@ public class SiteConsts {
 	
 	public static final String NB_LONGUEURS= "nbLongueurs";
 	public static final String LONGUEURS = "longueur";
+	
+	public static final String MODIFY_TAG = "modifyTag";
 }

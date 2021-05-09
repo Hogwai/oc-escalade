@@ -1,4 +1,4 @@
-package com.lesamisdelescalade.enums;
+package com.lesamisdelescalade.consts;
 
 public class UserInfoConsts {
 	private UserInfoConsts() {

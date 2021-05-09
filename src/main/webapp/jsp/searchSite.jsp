@@ -60,8 +60,8 @@
 				            </div>
 				            <div class="col-6 form-group">
 				            	<div class="custom-control custom-checkbox mt-5">
-				                <input type="checkbox" class="custom-control-input" id="tagYN" name="tagYN" />
-				                <label class="custom-control-label" for="tagYN">Officiel "Les amis de l&#039escalade"</label>
+					                <input type="checkbox" class="custom-control-input" id="tagYN" name="tagYN" />
+					                <label class="custom-control-label" for="tagYN">Officiel "Les amis de l&#039escalade"</label>
 				                </div>
 				            </div>
 				        </div>
@@ -107,7 +107,7 @@
 						</thead>
 						<tbody>
 							<c:forEach var="site" items="${sites}" >
-								<tr onclick="window.location='${pageContext.request.contextPath}/site?siteId=${site.id}'">
+								<tr>
 									<th scope="row">${site.id}</th>
 									<td>${site.libelle}</td>
 									<td>${site.hauteur}</td>
@@ -117,6 +117,11 @@
 									<td>${fn:length(site.secteurs)}</td>
 									<td>${site.sumOfVoies()}</td>
 									<td>${site.sumOfLongueurs()}</td>
+									<td>
+										<a href="${pageContext.request.contextPath}/site?siteId=${site.id}" class="btn btn-primary">
+											Voir le site
+										</a>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

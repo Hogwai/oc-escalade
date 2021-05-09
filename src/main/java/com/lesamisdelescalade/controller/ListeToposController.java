@@ -12,20 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.lesamisdelescalade.enums.StatutTopoConsts;
-import com.lesamisdelescalade.enums.TopoConsts;
-import com.lesamisdelescalade.enums.UserInfoConsts;
+import com.lesamisdelescalade.consts.StatutTopoConsts;
+import com.lesamisdelescalade.consts.TopoConsts;
+import com.lesamisdelescalade.consts.UserInfoConsts;
 import com.lesamisdelescalade.model.Topo;
 import com.lesamisdelescalade.model.Utilisateur;
-import com.lesamisdelescalade.service.SiteService;
 import com.lesamisdelescalade.service.TopoService;
 
 /**
  * Servlet implementation class ListeToposController
  */
-@Component
 @WebServlet("/listetopos")
 public class ListeToposController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,36 +31,14 @@ public class ListeToposController extends HttpServlet {
 	
 	private static final String PARSE_ERROR = "Error occurred during string parsing: %s";
        
-	@SuppressWarnings("unused")
-	private static SiteService siteService;
-	
-	
-	@SuppressWarnings("unused")
-	private static TopoService topoService;
-	
-	
-	public ListeToposController() {}
-
-	@SuppressWarnings("static-access")
 	@Autowired
-    public ListeToposController(SiteService siteService, TopoService topoService) {
-        super();
-        this.siteService = siteService;
-        this.topoService = topoService;
-    }
-    
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setSiteService(SiteService siteService) {
-    	this.siteService = siteService;
-    }
-    
-    
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setTopoService(TopoService topoService) {
-    	this.topoService = topoService;
-    }
+	private TopoService topoService;
+	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	}
 
     private void setListeToposRequest(HttpServletRequest request, Utilisateur currentUser) {
 		List<Topo> toposEnAttente = topoService.getToposByEmprunteurStatut(currentUser,

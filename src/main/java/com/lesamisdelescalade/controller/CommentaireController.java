@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.lesamisdelescalade.enums.SiteConsts;
-import com.lesamisdelescalade.enums.UserInfoConsts;
+import com.lesamisdelescalade.consts.SiteConsts;
+import com.lesamisdelescalade.consts.UserInfoConsts;
 import com.lesamisdelescalade.model.Site;
 import com.lesamisdelescalade.model.Utilisateur;
 import com.lesamisdelescalade.service.CommentaireService;
@@ -22,7 +22,6 @@ import com.lesamisdelescalade.service.SiteService;
 /**
  * Servlet implementation class CommentaireController
  */
-@Component
 @WebServlet("/commentaire")
 public class CommentaireController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,34 +29,17 @@ public class CommentaireController extends HttpServlet {
 	
 	private static final String PARSE_ERROR = "Error occurred during string parsing: %s";
        
-	@SuppressWarnings("unused")
-	private static SiteService siteService;
+	@Autowired
+	private SiteService siteService;
 	
-	@SuppressWarnings("unused")
-	private static CommentaireService commentaireService;
+	@Autowired
+	private CommentaireService commentaireService;
 	
-	public CommentaireController() {}
-
-	@SuppressWarnings("static-access")
-	@Autowired
-    public CommentaireController(SiteService siteService, CommentaireService commentaireService) {
-        super();
-        this.siteService = siteService;
-        this.commentaireService = commentaireService;
-    }
-    
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setSiteService(SiteService siteService) {
-    	this.siteService = siteService;
-    }
-    
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setCommentaireService(CommentaireService commentaireService) {
-    	this.commentaireService = commentaireService;
-    }
-
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

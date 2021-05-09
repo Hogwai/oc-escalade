@@ -46,7 +46,7 @@
 					    </div>
 					    <div class="collapse" id="collapseRegisterTopo">
 					   		<div class="form-row">
-      						        <div class="col-6 form-group">
+   						        <div class="col-6 form-group">
 						            <label for="nom">Nom du topo</label>
 						            <input class="form-control" id="nom" type="text" placeholder="Nom du topo" name="nom" required>
 						        </div>

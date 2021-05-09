@@ -5,10 +5,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lesamisdelescalade.consts.UserInfoConsts;
 import com.lesamisdelescalade.dao.UtilisateurDao;
 import com.lesamisdelescalade.model.Utilisateur;
 import com.lesamisdelescalade.service.UtilisateurService;
-import com.lesamisdelescalade.enums.UserInfoConsts;
 
 @Service("utilisateurService")
 public class UtilisateurServiceImpl implements UtilisateurService {

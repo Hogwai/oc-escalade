@@ -111,30 +111,35 @@
 				<hr class="solid">
 			</div>
 			<!-- /.row -->
-			
+	
 			<!-- modals -->
-			<c:forEach var="topo" items="${toposReserves}" >
-				<div class="modal fade" id="topo${topo.id}" role="dialog" aria-labelledby="topo${topo.id}Label" aria-hidden="true">
-				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="topo${topo.id}Label">Coordonnées du propriétaire</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-				      <div class="modal-body">
-				      	<p>Nom: ${topo.emprunteur.nom}</p>
-				      	<p>Prénom: ${topo.emprunteur.prenom}</p>
-				      	<p>Téléphone: ${topo.emprunteur.numeroTel}</p>
-				      	<p>Adresse: ${topo.emprunteur.adresse} ${topo.emprunteur.codePostal}</p>
-				      	<p>Email: ${topo.emprunteur.email}</p>
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-				      </div>
-				    </div>
-				  </div>
+			<c:forEach var="topo" items="${toposReserves}">
+				<div class="modal fade" id="topo${topo.id}" role="dialog"
+					aria-labelledby="topo${topo.id}Label" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="topo${topo.id}Label">Coordonnées
+									du propriétaire</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>Nom: ${topo.emprunteur.nom}</p>
+								<p>Prénom: ${topo.emprunteur.prenom}</p>
+								<p>Téléphone: ${topo.emprunteur.numeroTel}</p>
+								<p>Adresse: ${topo.emprunteur.adresse}
+									${topo.emprunteur.codePostal}</p>
+								<p>Email: ${topo.emprunteur.email}</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Fermer</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</c:forEach>
 			<!-- /.modals -->

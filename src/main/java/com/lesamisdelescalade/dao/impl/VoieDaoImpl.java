@@ -15,10 +15,16 @@ import org.springframework.stereotype.Repository;
 public class VoieDaoImpl extends BaseDao<Voie> implements VoieDao {
     public VoieDaoImpl() {
         this.setmodelClass(Voie.class);
+        this.initEntityManager();
     }
 
     @Override
     public List<Voie> search(Voie criteria) {
         return new ArrayList<>();
+    }
+    
+    @Override
+    public void addVoie(Voie voie) {
+    	this.create(voie);
     }
 }

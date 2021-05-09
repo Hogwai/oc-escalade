@@ -32,11 +32,9 @@
 			</nav>
 			
 			<div class="row">
-				
-				<!-- /.col-lg-3 -->
 				<div class="col-lg-12">
-					<div class="${sessionScope.utilisateur.membreAssoYN eq 0 ? 'card mb-3 collapse' : 'card mb-3'}">
-				    	<div class="card-body">
+					<div class="card mb-3">
+				    	<div class="${sessionScope.utilisateur.membreAssoYN eq 0 ? 'card-body collapse' : 'card-body mb-3'}">
 							<form id="modifyTag" action="/lesamisdelescalade/site?modifyTag" method="POST">
 			                	<input type="hidden" id="siteId" name="siteId" value="${currentSite.id}">
 			                	<div class="form-group">
@@ -49,14 +47,19 @@
 	                    		</div>
 			                </form>
 				    	</div>
+				    	<!-- /.card-body -->
+				    	
+	       				<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSecteur">
+						  	Ajouter un secteur
+						</button>
 					</div>
+					<!-- /.card mb-3 -->
+					
 					<div class="row">
 						<c:forEach var="secteur" items="${currentSite.secteurs}" >
 						    <div class="col-lg-4 col-md-6 mb-4">
 								<div class="card h-100">
-									<a href="#">
-										<img class="card-img-top" src="http://placehold.it/700x400" alt="">
-									</a>
 									<div class="card-body">
 										<h4 class="card-title">
 											<a href="/lesamisdelescalade/secteur?secteurId=${secteur.id}">Secteur: <c:out value="${secteur.id}" /></a>
@@ -66,8 +69,6 @@
 										</p>
 									</div>
 									<div class="card-footer">
-										<small class="text-muted">&#9733; &#9733; &#9733;
-											&#9733; &#9734;</small>
 									</div>
 									<!-- /.card-footer -->
 								</div>
@@ -78,6 +79,7 @@
 						<!-- /.forEach -->
 					</div>
 					<!-- /.row -->
+					
 					<div class="row">
 						<!-- Commentaires -->
 						<div class="col-sm-5 col-md-6 col-12 pb-4">
@@ -124,7 +126,10 @@
 								</div>
 								<!-- /.comment-widgets -->
 							</div>
+							<!-- /.card -->
 			            </div>
+			            <!-- /.col-sm-5 col-md-6 col-12 pb-4 -->
+			            
 			            <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
 			                <form action="/lesamisdelescalade/commentaire?add" id="algin-form" method="POST">
 			                    <div class="form-group">
@@ -141,10 +146,45 @@
 			            </div>
 			            <!-- /.Commentaires -->
 					</div>
+					<!-- /.row -->
 				</div>
-				<!-- /.col-lg-9 -->
+				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
+
+			<!-- modal -->
+			<div class="modal fade" id="addSecteur" role="dialog" aria-labelledby="addSecteurLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="addSecteurLabel">Ajouter un secteur</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form action="${pageContext.request.contextPath}/site?addSecteur" method="POST">
+								<div class="form-row">
+									<label for="libelleSecteur">Libellé</label> 
+									<input class="form-control"
+										id="libelleSecteur" type="text" placeholder="libellé du secteur"
+										name="libelleSecteur" required>
+									<input type="hidden" id="siteId" name="siteId" value="${currentSite.id}">
+								</div>
+								<button class="btn btn-primary btn-lg btn-block m-2" type="submit">
+									Enregistrer
+								</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Fermer</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal -->
 		</div>
 		<!-- /.container -->
 	

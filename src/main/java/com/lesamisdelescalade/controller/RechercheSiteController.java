@@ -12,44 +12,34 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import com.lesamisdelescalade.consts.SiteConsts;
 import com.lesamisdelescalade.criteria.SearchSiteCriteria;
-import com.lesamisdelescalade.enums.SiteConsts;
 import com.lesamisdelescalade.model.Site;
 import com.lesamisdelescalade.service.SiteService;
 
 /**
  * Servlet implementation class RechercheController
  */
-@Component
 @WebServlet("/recherchesite")
 public class RechercheSiteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected static final Logger LOGGER = LogManager.getLogger(RechercheSiteController.class);
        
-	private static SiteService siteService;
-	public RechercheSiteController() {}
-
-	@SuppressWarnings("static-access")
 	@Autowired
-    public RechercheSiteController(SiteService siteService) {
-        super();
-        this.siteService = siteService;
-    }
-    
-    @SuppressWarnings("static-access")
-	@Autowired
-    public void setSiteService(SiteService siteService) {
-    	this.siteService = siteService;
-    }
-   
+	private SiteService siteService;
+	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	}
 
     
 	public void setDropdownValues(HttpServletRequest request) {
 		request.setAttribute(SiteConsts.VILLE_PAYS, siteService.getAllVillePays());
 	}
-	
 	
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
