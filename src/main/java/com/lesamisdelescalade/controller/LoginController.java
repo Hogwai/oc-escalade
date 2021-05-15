@@ -42,7 +42,6 @@ public class LoginController extends HttpServlet {
         } catch (ServletException | IOException e){
             LOGGER.error(String.format("Error occurred: %s", e.toString()));
         }
-
     }
 
     @Override
@@ -57,8 +56,8 @@ public class LoginController extends HttpServlet {
 
     private void validateAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("pseudo");
-        String password = request.getParameter("motDePasse");
+        String username = request.getParameter(UserInfoConsts.PSEUDO);
+        String password = request.getParameter(UserInfoConsts.MOTDEPASSE);
 
         if (username != null && !username.isEmpty() &&
                 (password != null && !password.isEmpty())) {

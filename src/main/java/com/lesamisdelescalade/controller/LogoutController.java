@@ -18,7 +18,8 @@ public class LogoutController extends HttpServlet {
     	req.getSession().invalidate();
     	try {
 			resp.sendRedirect(req.getContextPath() + "/login");
-		} catch (IOException e) {
+			
+		} catch (IOException | IllegalStateException e) {
 			 LOGGER.error(String.format("Error occurred during logout: %s", e.toString()));
 		}
     }
