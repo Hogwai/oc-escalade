@@ -112,7 +112,7 @@
 	
 
 	<build>
-		<finalName>Lesamisdelescalade</finalName>
+		<finalName>les-amis-de-l-escalade</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -128,9 +128,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<release>12</release>
+						<source>12</source>
+						<target>12</target>
 					</configuration>
 				</plugin>
 				<plugin>
