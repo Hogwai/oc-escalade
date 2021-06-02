@@ -11,19 +11,15 @@ public abstract class BaseDao<T extends Serializable> {
     protected static final Logger LOGGER = LogManager.getLogger(BaseDao.class);
     protected Class<T> modelClass;
     protected EntityManager em;
-    private static String cliArg;
     
-    public static void main(String[] args) {
-    	cliArg = args[0];
-    }
 
     public void setmodelClass(Class<T> modelClass) {
         this.modelClass = modelClass;
     }
 
 	public EntityManagerFactory getEntityManagerFactory() {
-		return cliArg == null ? Persistence.createEntityManagerFactory("lesamisdelescalade")
-				: Persistence.createEntityManagerFactory("lesamisdelescalade_heroku");
+		return Persistence.createEntityManagerFactory("lesamisdelescalade");
+				
 	}
 
     public void initEntityManager(){
@@ -38,7 +34,7 @@ public abstract class BaseDao<T extends Serializable> {
         return em.getTransaction();
     }
 
-    public T create(T obj) {
+    public T create(T obj) throws EntityExistsException {
         EntityTransaction tx = this.getTransaction();
         tx.begin();
         em.persist(obj);

@@ -3,6 +3,7 @@ package com.lesamisdelescalade.controller;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.persistence.EntityExistsException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +27,8 @@ import com.lesamisdelescalade.service.UtilisateurService;
 public class RegisterController extends HttpServlet {
 	protected static final Logger LOGGER = LogManager.getLogger(RegisterController.class);
 	private static final long serialVersionUID = 1L;
+	private static final String REGISTER_ERROR = "registerError";
+	private static final String REGISTER_JSP = "/jsp/register.jsp";
 	
 	@Autowired
 	private UtilisateurService utilisateurService;
@@ -41,7 +44,7 @@ public class RegisterController extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
-            this.getServletContext().getRequestDispatcher("/jsp/register.jsp")
+            this.getServletContext().getRequestDispatcher(REGISTER_JSP)
                     .forward(request, response);
         } catch (ServletException | IOException e){
             LOGGER.error(String.format("Error occurred: %s", e.toString()));
@@ -71,14 +74,22 @@ public class RegisterController extends HttpServlet {
 		userInfos.put(UserInfoConsts.NOM, request.getParameter(UserInfoConsts.NOM));
 		userInfos.put(UserInfoConsts.PRENOM, request.getParameter(UserInfoConsts.PRENOM));
 		userInfos.put(UserInfoConsts.MEMBREASSOYN, request.getParameter(UserInfoConsts.MEMBREASSOYN) == null ? "0" : "1");
-		Utilisateur userForSession = utilisateurService.registerUser(userInfos);
+		
+		Utilisateur userForSession = null;
+		try {
+			userForSession = utilisateurService.registerUser(userInfos);
+		} catch (EntityExistsException e) {
+			request.setAttribute(REGISTER_ERROR, "Les informations saisies existent déjà en base. Veuillez les modifier.");
+			this.getServletContext().getRequestDispatcher(REGISTER_JSP).forward(request, response);
+		}
+		
         if (userForSession != null) {
         	HttpSession session = request.getSession(true);
 			session.setAttribute(UserInfoConsts.UTILISATEUR, userForSession);
 			response.sendRedirect(request.getContextPath() + "/home");
 		} else {
-			request.setAttribute("registerError", "Veuillez remplir tous les champs.");
-			this.getServletContext().getRequestDispatcher("/jsp/register.jsp").forward(request, response);
+			request.setAttribute(REGISTER_ERROR, "Veuillez remplir tous les champs.");
+			this.getServletContext().getRequestDispatcher(REGISTER_JSP).forward(request, response);
 		}
     }
 }

@@ -55,20 +55,14 @@ public class RechercheSiteController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String libelle = getParamStrFromReq(request, SiteConsts.LIBELLE);
 		String ville = getParamStrFromReq(request, SiteConsts.VILLE);
-
-		Integer nbSecteurMax = getParamIntFromReq(request, SiteConsts.NB_SECTEURS);
-		Integer nbVoieMax = getParamIntFromReq(request, SiteConsts.NB_VOIES);
-		Integer nbLongueurMax = getParamIntFromReq(request, SiteConsts.NB_LONGUEURS);
-
+		Integer nbSecteurMin = getParamIntFromReq(request, SiteConsts.NB_SECTEURS);
 		Float hauteur = request.getParameter(SiteConsts.HAUTEUR).isEmpty() ? null
 				: Float.valueOf(request.getParameter(SiteConsts.HAUTEUR));
 		Integer tagValue = request.getParameter(SiteConsts.TAG_YN) == null ? 0 : 1;
 
-		SearchSiteCriteria criteria = new SearchSiteCriteria(libelle, hauteur, tagValue, ville, nbSecteurMax, nbVoieMax,
-				nbLongueurMax, null);
+		SearchSiteCriteria criteria = new SearchSiteCriteria(libelle, hauteur, tagValue, ville, nbSecteurMin);
 		List<Site> sitesResult = siteService.search(criteria);
 		request.setAttribute(SiteConsts.SITES, sitesResult);
 		this.dispatchSearchSitePage(request, response);
@@ -84,15 +78,11 @@ public class RechercheSiteController extends HttpServlet {
 	}
 	
 
-	
 	private void dispatchSearchSitePage(HttpServletRequest request, HttpServletResponse response) {
-		this.setDropdownValues(request);
 		try {
-            this.getServletContext().getRequestDispatcher("/jsp/searchSite.jsp")
-                    .forward(request, response);
-        } catch (ServletException | IOException e){
-            LOGGER.error(String.format("Error occurred: %s", e.toString()));
-        }
+			this.doGet(request, response);
+		} catch (ServletException |IOException e) {
+			LOGGER.error(String.format("Error occurred: %s", e.toString()));
+		}
 	}
-
 }

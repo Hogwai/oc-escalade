@@ -2,6 +2,8 @@ package com.lesamisdelescalade.service.impl;
 
 import java.util.Map;
 
+import javax.persistence.EntityExistsException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	private UtilisateurDao utilisateurDao;
     
     @Override
-	public Utilisateur registerUser(Map<String, String> userInfos) {
+	public Utilisateur registerUser(Map<String, String> userInfos) throws EntityExistsException {
     	for(Map.Entry<String, String> entry : userInfos.entrySet()) {
     		if(entry.getValue() == null || entry.getValue().isEmpty()){
     			return null;

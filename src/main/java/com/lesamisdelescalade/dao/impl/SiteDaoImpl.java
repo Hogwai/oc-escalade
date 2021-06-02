@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -22,7 +21,6 @@ import com.lesamisdelescalade.criteria.SearchSiteCriteria;
 import com.lesamisdelescalade.dao.SiteDao;
 import com.lesamisdelescalade.model.Secteur;
 import com.lesamisdelescalade.model.Site;
-import com.lesamisdelescalade.model.Voie;
 
 @Repository("siteDao")
 @Transactional
@@ -50,6 +48,7 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
 		results.forEach(result -> villePaysMap.put((String) result[0], (String) result[1]));
 		return villePaysMap;
 	}
+	
 
     @Override
     public List<Site> search(SearchSiteCriteria criteria) {
@@ -80,18 +79,10 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
 			conditions.add(critBuilder.equal(siteRoot.<String>get(SiteConsts.VILLE), ville));
 		}
 
-		if (criteria.getNbSecteurMax() != null) {
+		if (criteria.getNbSecteurMin() != null) {
 			ParameterExpression<Integer> nbSecteur = critBuilder.parameter(Integer.class, SiteConsts.SECTEURS);
-			conditions.add(critBuilder.lessThanOrEqualTo(
+			conditions.add(critBuilder.greaterThanOrEqualTo(
 					critBuilder.size(siteRoot.<Collection<Secteur>>get(SiteConsts.SECTEURS)), nbSecteur));
-		}
-
-		if (criteria.getNbVoieMax() != null) {
-			ParameterExpression<Integer> nbVoie = critBuilder.parameter(Integer.class, SiteConsts.VOIES);
-			Join<Site, Secteur> secteurJoin = siteRoot.join(SiteConsts.SECTEURS);
-			//secteurJoin.
-			conditions.add(critBuilder
-					.lessThanOrEqualTo(critBuilder.size(secteurJoin.<Collection<Voie>>get(SiteConsts.VOIES)), nbVoie));
 		}
 
 		// Query
@@ -111,12 +102,8 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
     		query.setParameter(SiteConsts.VILLE, criteria.getVille());
     	}
     	
-    	if (criteria.getNbSecteurMax() != null) {
-    		query.setParameter(SiteConsts.SECTEURS, criteria.getNbSecteurMax());
-    	}
-    	
-    	if (criteria.getNbVoieMax() != null) {
-    		query.setParameter(SiteConsts.VOIES, criteria.getNbVoieMax());
+    	if (criteria.getNbSecteurMin() != null) {
+    		query.setParameter(SiteConsts.SECTEURS, criteria.getNbSecteurMin());
     	}
         return query.getResultList();
     }

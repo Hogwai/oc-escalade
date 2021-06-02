@@ -36,6 +36,7 @@ public class SessionFilter implements Filter {
 		excludedUri.add(BASE_URI + "img/lesamisdelescalade_crop.png");
 		excludedUri.add(BASE_URI + "img/lesamisdelescalade_lg.png");
 		excludedUri.add(BASE_URI + "jsp/login.jsp");
+		excludedUri.add(BASE_URI + "jsp/register.jsp");
 	}
 
 	@Override

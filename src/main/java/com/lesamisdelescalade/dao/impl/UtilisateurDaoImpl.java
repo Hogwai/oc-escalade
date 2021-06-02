@@ -4,6 +4,7 @@ import com.lesamisdelescalade.dao.UtilisateurDao;
 import com.lesamisdelescalade.model.Utilisateur;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class UtilisateurDaoImpl extends BaseDao<Utilisateur> implements Utilisat
     }
 
 	@Override
-	public Utilisateur registerUser(Utilisateur userToRegister) {
+	public Utilisateur registerUser(Utilisateur userToRegister) throws EntityExistsException {
 		this.initEntityManager();
 		return this.create(userToRegister);
 	}

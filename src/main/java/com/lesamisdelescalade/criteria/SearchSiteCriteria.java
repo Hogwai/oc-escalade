@@ -9,29 +9,17 @@ public class SearchSiteCriteria {
 	private String ville;
 	
 	// Secteur
-	private Integer nbSecteurMax;
-	
-	// Voie
-	private Integer nbVoieMax;
-	
-	// Cotation
-	private Integer nbLongueurMax;
+	private Integer nbSecteurMin;
 		
-	// Topo
-	private Integer nbTopoMax;
-	
 
 	public SearchSiteCriteria(String libelle, Float hauteur, Integer tagYN, String ville,
-			Integer nbSecteurMax, Integer nbVoieMax, Integer nbLongueurMax, Integer nbTopoMax) {
+			Integer nbSecteurMin) {
 		super();
 		this.libelle = libelle;
 		this.hauteur = hauteur;
 		this.tagYN = tagYN;
-		this.ville = ville;;
-		this.nbSecteurMax = nbSecteurMax;
-		this.nbVoieMax = nbVoieMax;
-		this.nbLongueurMax = nbLongueurMax;
-		this.nbTopoMax = nbTopoMax;
+		this.ville = ville;
+		this.nbSecteurMin = nbSecteurMin;
 	}
 
 	public String getLibelle() {
@@ -66,40 +54,16 @@ public class SearchSiteCriteria {
 		this.ville = ville;
 	}
 	
-	public Integer getNbSecteurMax() {
-		return nbSecteurMax;
+	public Integer getNbSecteurMin() {
+		return nbSecteurMin;
 	}
 
-	public void setNbSecteurMax(Integer nbSecteurMax) {
-		this.nbSecteurMax = nbSecteurMax;
-	}
-
-	public Integer getNbTopoMax() {
-		return nbTopoMax;
-	}
-
-	public void setNbTopoMax(Integer nbTopoMax) {
-		this.nbTopoMax = nbTopoMax;
-	}
-
-	public Integer getNbLongueurMax() {
-		return nbLongueurMax;
-	}
-
-	public void setNbLongueurMax(Integer nbLongueurMax) {
-		this.nbLongueurMax = nbLongueurMax;
-	}
-
-	public Integer getNbVoieMax() {
-		return nbVoieMax;
-	}
-
-	public void setNbVoieMax(Integer nbVoieMax) {
-		this.nbVoieMax = nbVoieMax;
+	public void setNbSecteurMax(Integer nbSecteurMin) {
+		this.nbSecteurMin = nbSecteurMin;
 	}
 
 	public Boolean isNull() {
 		return this.libelle == null && this.hauteur == null && this.tagYN == null && this.ville == null
-				&& this.nbSecteurMax == null && this.nbTopoMax == null && this.nbLongueurMax == null;
+				&& this.nbSecteurMin == null;
 	}
 }
