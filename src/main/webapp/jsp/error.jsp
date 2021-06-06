@@ -22,8 +22,8 @@
 		<div class="container">
 			<jsp:include page='include/navbar.jsp'/>
 			<div class="row">
-				<div class="col-md-12 d-flex flex-column justify-content-center align-items-center text-white vh-100">
-					<div class="error-template">
+				<div class="col-md-12 text-center">
+					<div class="card">
 						<h1>404</h1>
 						<h2>Page non trouvée</h2>
 						<div class="error-details">Une erreur est survenue: la page démandée n'existe pas.</div>
@@ -41,15 +41,7 @@
 			<!-- /.row -->
 		</div>
 		<!-- /.container -->
-	
-		<!-- Footer -->
-		<footer class="py-5 bg-dark">
-			<div class="container">
-				<p class="m-0 text-center text-white">Copyright &copy; Your
-					Website 2020</p>
-			</div>
-			<!-- /.container -->
-		</footer>
+
 	
 		<!-- Bootstrap core JavaScript -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityExistsException;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Stream;
 
 
 @Repository("utilisateurDao")
@@ -17,17 +16,12 @@ public class UtilisateurDaoImpl extends BaseDao<Utilisateur> implements Utilisat
 	
 	public UtilisateurDaoImpl() {
         this.setmodelClass(Utilisateur.class);
-    }
-	
-    @Override
-    public List<Utilisateur> search(Utilisateur criteria) {
-        return new ArrayList<>();
+        this.initEntityManager();
     }
 
     @Override
     public Utilisateur isRegisteredUser(String username, String password) {
     	Utilisateur user;
-        this.initEntityManager();
         this.getTransaction().begin();
         try {
 			user = (Utilisateur) this.getEntityManager()
@@ -42,7 +36,13 @@ public class UtilisateurDaoImpl extends BaseDao<Utilisateur> implements Utilisat
 
 	@Override
 	public Utilisateur registerUser(Utilisateur userToRegister) throws EntityExistsException {
-		this.initEntityManager();
+		Utilisateur userCheck = this.isRegisteredUser(userToRegister.getPseudo(), userToRegister.getMotDePasse());
+		Stream<Utilisateur> users = this.getAll().stream()
+				.filter(user -> (user.getEmail().equals(userToRegister.getEmail())
+						|| user.getNumeroTel().equals(userToRegister.getNumeroTel())));
+		if (userCheck != null || users.count() > 0) {
+			throw new EntityExistsException();
+		}
 		return this.create(userToRegister);
 	}
 }

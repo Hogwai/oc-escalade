@@ -68,7 +68,7 @@ public class CommentaireController extends HttpServlet {
 	
 	
 	/**
-	 * 
+	 * Add new comment
 	 * @param request
 	 */
 	public void addComment(HttpServletRequest request, Integer siteId) {
@@ -78,7 +78,7 @@ public class CommentaireController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Delete comment
 	 * @param request
 	 */
 	public void deleteComment(HttpServletRequest request) {
@@ -87,7 +87,7 @@ public class CommentaireController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Modify comment
 	 * @param request
 	 */
 	public void modifyComment(HttpServletRequest request) {
@@ -98,7 +98,7 @@ public class CommentaireController extends HttpServlet {
 	
 	
 	/**
-	 * 
+	 * Redirect to the site details page
 	 * @param request
 	 * @param response
 	 */
@@ -111,7 +111,7 @@ public class CommentaireController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Get site id from request
 	 * @param request
 	 * 		HttpServletRequest
 	 * @return SiteId

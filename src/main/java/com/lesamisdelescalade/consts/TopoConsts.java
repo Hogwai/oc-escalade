@@ -1,5 +1,10 @@
 package com.lesamisdelescalade.consts;
 
+/**
+ * Topo constants
+ * @author Lilian
+ *
+ */
 public class TopoConsts {
 	private TopoConsts() {
 		throw new IllegalStateException("Utility class");
@@ -24,11 +29,4 @@ public class TopoConsts {
 	public static final String TOPOS_INDISPONIBLES= "toposIndisponibles";
 	public static final String TOPOS_RESERVES= "toposReserves";
 	public static final String TOPOS_ACCEPT= "toposAccept";
-	/*public static final String MOTDEPASSE = "motDePasse";
-	public static final String NOM = "nom";
-	public static final String PRENOM = "prenom";
-	public static final String NUMTEL = "numTel";
-	public static final String EMAIL = "email";
-	public static final String ADRESSE = "adresse";
-	public static final String CODEPOSTAL = "codePostal";*/
 }

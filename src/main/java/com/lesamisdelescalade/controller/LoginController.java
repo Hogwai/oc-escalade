@@ -54,6 +54,13 @@ public class LoginController extends HttpServlet {
 
     }
 
+    /**
+     * Validate the authentication
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void validateAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter(UserInfoConsts.PSEUDO);

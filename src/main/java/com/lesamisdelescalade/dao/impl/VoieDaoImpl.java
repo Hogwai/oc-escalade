@@ -17,11 +17,6 @@ public class VoieDaoImpl extends BaseDao<Voie> implements VoieDao {
         this.setmodelClass(Voie.class);
         this.initEntityManager();
     }
-
-    @Override
-    public List<Voie> search(Voie criteria) {
-        return new ArrayList<>();
-    }
     
     @Override
     public void addVoie(Voie voie) {

@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
+/**
+ * Voie entity
+ * @author Lilian
+ *
+ */
 @Entity
 @Table(name = "voie")
 public class Voie implements Serializable {

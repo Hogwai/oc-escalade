@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * StatutTopo entity
+ * @author Lilian
+ *
+ */
 @Entity
 @Table(name = "statut_topo")
 public class StatutTopo implements Serializable {

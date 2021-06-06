@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * Cotation entity
+ * @author Lilian
+ *
+ */
 @Entity
 @Table(name = "cotation")
 public class Cotation implements Serializable {

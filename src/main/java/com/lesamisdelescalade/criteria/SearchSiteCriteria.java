@@ -1,6 +1,10 @@
 package com.lesamisdelescalade.criteria;
 
-
+/**
+ * Criteria class for the search site feature
+ * @author Lilian
+ *
+ */
 public class SearchSiteCriteria {
 	// Site
 	private String libelle;

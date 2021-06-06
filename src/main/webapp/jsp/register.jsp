@@ -12,9 +12,12 @@
 	    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/lesamisdelescalade_crop.png" sizes="192x192" />
 	</head>
 	<body>
- 		<div class="container col-md-6 col-md-offset-3" style="overflow: auto">
+ 		<div class="container col-md-6 col-md-offset-3" >
  		<img src="${pageContext.request.contextPath}/img/lesamisdelescalade_lg.png" class="rounded mx-auto d-block" alt="Les Amis de l'Escalade">
 			<div class="border border-light p-2">
+				<div class="${requestScope.registerError ne null ? 'alert alert-danger' : 'alert alert-danger collapse'}">
+					<strong>Attention.</strong> ${requestScope.registerError}
+				</div>
 			    <form action="register" method="post">
 			        <div class="form-group">
 						<div class="row">
@@ -52,9 +55,6 @@
 			    </form>
 				<div class="text-center">Vous êtes déjà inscrit ?</div>
 				<div class="text-center"><a href="login" class="btn btn-primary">Se connecter</a></div>
-				<div class="${requestScope.registerError ne null ? 'alert alert-danger' : 'alert alert-danger collapse'}">
-					<strong>Attention.</strong> ${requestScope.registerError}
-				</div>
 			</div>
 		</div>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

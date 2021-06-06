@@ -1,5 +1,10 @@
 package com.lesamisdelescalade.consts;
 
+/**
+ * Secteur constants
+ * @author Lilian
+ *
+ */
 public class SecteurConsts {
 	private SecteurConsts() {
 		throw new IllegalStateException("Utility class");
@@ -10,11 +15,4 @@ public class SecteurConsts {
 	public static final String LIBELLE_SECTEUR = "libelleSecteur";
 	
 	public static final String SECTEUR_ID = "secteurId";
-	/*public static final String MOTDEPASSE = "motDePasse";
-	public static final String NOM = "nom";
-	public static final String PRENOM = "prenom";
-	public static final String NUMTEL = "numTel";
-	public static final String EMAIL = "email";
-	public static final String ADRESSE = "adresse";
-	public static final String CODEPOSTAL = "codePostal";*/
 }

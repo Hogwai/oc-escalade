@@ -72,7 +72,7 @@ public class ListeToposController extends HttpServlet {
     
     
     /**
-     * 
+     * Cancel a topo booking
      * @param request
      * @param currentUser
      */
@@ -82,7 +82,7 @@ public class ListeToposController extends HttpServlet {
     }
     
     /**
-     * 
+     * Book a topo
      * @param request
      * @param currentUser
      */
@@ -92,7 +92,7 @@ public class ListeToposController extends HttpServlet {
 	}
 
 	/**
-	 * 
+	 * Dispatch the listeTopos page
 	 * @param request
 	 * @param response
 	 */
@@ -105,7 +105,7 @@ public class ListeToposController extends HttpServlet {
         }
 	}
 	/**
-	 * 
+	 * Redirect to the listeTopos page
 	 * @param request
 	 * @param response
 	 */
@@ -118,7 +118,7 @@ public class ListeToposController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Get topo id from the request
 	 * @param request
 	 * @return
 	 */

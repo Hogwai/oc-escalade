@@ -3,6 +3,11 @@ package com.lesamisdelescalade.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Longueur entity
+ * @author Lilian
+ *
+ */
 @Entity
 @Table(name = "longueur")
 public class Longueur implements Serializable {

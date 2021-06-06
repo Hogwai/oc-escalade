@@ -76,7 +76,7 @@ public class SecteurDetailsController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Set dropdown values
 	 * @param request
 	 */
 	public void setDropdownValues(HttpServletRequest request) {
@@ -84,7 +84,7 @@ public class SecteurDetailsController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Dispatch secteur details page
 	 * @param request
 	 * @param response
 	 */
@@ -98,7 +98,7 @@ public class SecteurDetailsController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Redirect secteur details page
 	 * @param request
 	 * @param response
 	 */
@@ -116,7 +116,7 @@ public class SecteurDetailsController extends HttpServlet {
 	
 	
 	/**
-	 * 
+	 * Get secteur id from request
 	 * @param request
 	 * @return
 	 */
@@ -131,7 +131,7 @@ public class SecteurDetailsController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Get cotation id from request
 	 * @param request
 	 * @return
 	 */

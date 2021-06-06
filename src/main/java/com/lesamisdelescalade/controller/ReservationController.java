@@ -59,7 +59,7 @@ public class ReservationController extends HttpServlet {
 	}
     
     /**
-     * 
+     * Set topo lists as attributes
      * @param request
      * @param currentUser
      */
@@ -74,7 +74,7 @@ public class ReservationController extends HttpServlet {
     
     
     /**
-     * 
+     * Accept a topo booking
      * @param request
      * @param currentUser
      */
@@ -84,7 +84,7 @@ public class ReservationController extends HttpServlet {
     }
     
     /**
-     * 
+     * Refuse a topo booking
      * @param request
      * @param currentUser
      */
@@ -94,7 +94,7 @@ public class ReservationController extends HttpServlet {
 	}
 
 	/**
-	 * 
+	 * Dispatch bookings page
 	 * @param request
 	 * @param response
 	 */
@@ -107,7 +107,7 @@ public class ReservationController extends HttpServlet {
         }
 	}
 	/**
-	 * 
+	 * Redirect to the bookings page
 	 * @param request
 	 * @param response
 	 */
@@ -120,7 +120,7 @@ public class ReservationController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Get topo id from request
 	 * @param request
 	 * @return
 	 */

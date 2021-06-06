@@ -18,6 +18,11 @@ import javax.servlet.http.HttpSession;
 
 import com.lesamisdelescalade.consts.UserInfoConsts;
 
+/**
+ * Filter class for checking user session
+ * @author Lilian
+ *
+ */
 @WebFilter(
 	urlPatterns  = "/*", 
 	dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD}

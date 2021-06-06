@@ -1,5 +1,10 @@
 package com.lesamisdelescalade.consts;
 
+/**
+ * StatutTopo constants
+ * @author Lilian
+ *
+ */
 public class StatutTopoConsts {
 	private StatutTopoConsts() {
 		throw new IllegalStateException("Utility class");

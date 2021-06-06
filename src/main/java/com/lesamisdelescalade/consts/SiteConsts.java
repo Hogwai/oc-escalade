@@ -1,5 +1,10 @@
 package com.lesamisdelescalade.consts;
 
+/**
+ * Site constants
+ * @author Lilian
+ *
+ */
 public class SiteConsts {
 	private SiteConsts() {
 		throw new IllegalStateException("Utility class");

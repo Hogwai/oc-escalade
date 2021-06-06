@@ -1,5 +1,10 @@
 package com.lesamisdelescalade.consts;
 
+/**
+ * Voie constants
+ * @author Lilian
+ *
+ */
 public class VoieConsts {
 	private VoieConsts() {
 		throw new IllegalStateException("Utility class");
@@ -9,11 +14,4 @@ public class VoieConsts {
 	public static final String CURRENT_VOIE = "currentVoie";
 	public static final String EQUIPEE_YN = "equipeeYN";
 	public static final String VOIE_ID = "voieId";
-	/*public static final String MOTDEPASSE = "motDePasse";
-	public static final String NOM = "nom";
-	public static final String PRENOM = "prenom";
-	public static final String NUMTEL = "numTel";
-	public static final String EMAIL = "email";
-	public static final String ADRESSE = "adresse";
-	public static final String CODEPOSTAL = "codePostal";*/
 }

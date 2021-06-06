@@ -29,41 +29,44 @@ public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String REGISTER_ERROR = "registerError";
 	private static final String REGISTER_JSP = "/jsp/register.jsp";
-	
+
 	@Autowired
 	private UtilisateurService utilisateurService;
-	
-	
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-       
-    
+
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            this.getServletContext().getRequestDispatcher(REGISTER_JSP)
-                    .forward(request, response);
-        } catch (ServletException | IOException e){
-            LOGGER.error(String.format("Error occurred: %s", e.toString()));
-        }
-
-    }
+		try {
+			this.getServletContext().getRequestDispatcher(REGISTER_JSP).forward(request, response);
+		} catch (ServletException | IOException e) {
+			LOGGER.error(String.format("Error occurred: %s", e.toString()));
+		}
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
 			registerUser(request, response);
-		}catch (ServletException | IOException e) {
+		} catch (ServletException | IOException e) {
 			LOGGER.error(String.format("Error occurred: %s", e.toString()));
 		}
 	}
-	
-    private void registerUser(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+
+	/**
+	 * Register a new user
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void registerUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HashMap<String, String> userInfos = new HashMap<>();
 		userInfos.put(UserInfoConsts.PSEUDO, request.getParameter(UserInfoConsts.PSEUDO));
 		userInfos.put(UserInfoConsts.MOTDEPASSE, request.getParameter(UserInfoConsts.MOTDEPASSE));
@@ -73,23 +76,26 @@ public class RegisterController extends HttpServlet {
 		userInfos.put(UserInfoConsts.EMAIL, request.getParameter(UserInfoConsts.EMAIL));
 		userInfos.put(UserInfoConsts.NOM, request.getParameter(UserInfoConsts.NOM));
 		userInfos.put(UserInfoConsts.PRENOM, request.getParameter(UserInfoConsts.PRENOM));
-		userInfos.put(UserInfoConsts.MEMBREASSOYN, request.getParameter(UserInfoConsts.MEMBREASSOYN) == null ? "0" : "1");
-		
+		userInfos.put(UserInfoConsts.MEMBREASSOYN,
+				request.getParameter(UserInfoConsts.MEMBREASSOYN) == null ? "0" : "1");
+
 		Utilisateur userForSession = null;
 		try {
 			userForSession = utilisateurService.registerUser(userInfos);
 		} catch (EntityExistsException e) {
-			request.setAttribute(REGISTER_ERROR, "Les informations saisies existent déjà en base. Veuillez les modifier.");
+			request.setAttribute(REGISTER_ERROR,
+					"Les informations saisies existent déjà en base. Veuillez les modifier.");
 			this.getServletContext().getRequestDispatcher(REGISTER_JSP).forward(request, response);
+			return;
 		}
-		
-        if (userForSession != null) {
-        	HttpSession session = request.getSession(true);
+
+		if (userForSession != null) {
+			HttpSession session = request.getSession(true);
 			session.setAttribute(UserInfoConsts.UTILISATEUR, userForSession);
 			response.sendRedirect(request.getContextPath() + "/home");
 		} else {
 			request.setAttribute(REGISTER_ERROR, "Veuillez remplir tous les champs.");
 			this.getServletContext().getRequestDispatcher(REGISTER_JSP).forward(request, response);
 		}
-    }
+	}
 }

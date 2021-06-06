@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Commentaire entity
+ * @author Lilian
+ *
+ */
 @Entity
 @Table(name = "commentaire")
 public class Commentaire implements Serializable {

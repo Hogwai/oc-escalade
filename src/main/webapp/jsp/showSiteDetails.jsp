@@ -92,11 +92,8 @@
 					                <c:forEach var="commentaire" items="${currentSite.commentaires}" >
 						                <!-- Comment Row -->
 						                <div class="d-flex flex-row comment-row m-t-0 card m-2">
-						                    <div class="p-2">
-						                    	<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle">
-						                    </div>
 						                    <div class="comment-text w-100">
-						                        <h6 class="font-medium">${commentaire.utilisateur.nom} ${commentaire.utilisateur.prenom}</h6> 
+						                        <h6 class="font-medium"><span class="bi bi-person-circle m-2"></span>${commentaire.utilisateur.nom} ${commentaire.utilisateur.prenom}</h6> 
 						                        <span class="m-b-15 d-block m-2 card">${commentaire.contenu} </span>
 						                        <form action="/lesamisdelescalade/commentaire?delete" 
 						                        	class="${sessionScope.utilisateur.membreAssoYN eq 0 ? 'collapse' : ''}"

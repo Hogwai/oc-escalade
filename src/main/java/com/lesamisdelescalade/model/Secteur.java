@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * Secteur entity
+ * @author Lilian
+ *
+ */
 @Entity
 @Table(name = "secteur")
 public class Secteur implements Serializable {

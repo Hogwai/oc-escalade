@@ -1,5 +1,10 @@
 package com.lesamisdelescalade.consts;
 
+/**
+ * User constants
+ * @author Lilian
+ *
+ */
 public class UserInfoConsts {
 	private UserInfoConsts() {
 		throw new IllegalStateException("Utility class");

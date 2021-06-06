@@ -79,7 +79,7 @@ public class VoieDetailsController extends HttpServlet {
 	
 	
 	/**
-	 * 
+	 * Set dropdown values
 	 * @param request
 	 */
 	public void setDropdownValues(HttpServletRequest request) {
@@ -88,7 +88,7 @@ public class VoieDetailsController extends HttpServlet {
 	
 	
 	/**
-	 * 
+	 * Dispatch secteur details page
 	 * @param request
 	 * @param response
 	 */
@@ -101,7 +101,7 @@ public class VoieDetailsController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Redirect secteur details page
 	 * @param request
 	 * @param response
 	 */
@@ -119,7 +119,7 @@ public class VoieDetailsController extends HttpServlet {
 	
 	
 	/**
-	 * 
+	 * Get voie from request
 	 * @param request
 	 * @return
 	 */
@@ -134,7 +134,7 @@ public class VoieDetailsController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Get cotation from request
 	 * @param request
 	 * @return
 	 */

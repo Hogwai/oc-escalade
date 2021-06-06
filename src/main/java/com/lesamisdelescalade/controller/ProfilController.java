@@ -71,7 +71,7 @@ public class ProfilController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Modify a topo
 	 * @param request
 	 */
 	public void modifyTopo(HttpServletRequest request) {
@@ -81,6 +81,10 @@ public class ProfilController extends HttpServlet {
 		topoService.updateTopo(topoId, statutTopoTag);
 	}
 	
+	/**
+	 * Add a new topo
+	 * @param request
+	 */
 	public void addTopo(HttpServletRequest request) {
 		String nom = request.getParameter(TopoConsts.NOM);
 		String description = request.getParameter(TopoConsts.DESCRIPTION);
@@ -91,7 +95,7 @@ public class ProfilController extends HttpServlet {
 	}
 
 	/**
-	 * 
+	 * Dispatch profil page
 	 * @param request
 	 * @param response
 	 */
@@ -103,8 +107,9 @@ public class ProfilController extends HttpServlet {
             LOGGER.error(String.format("Error occurred: %s", e.toString()));
         }
 	}
+	
 	/**
-	 * 
+	 * Redirect to profil page
 	 * @param request
 	 * @param response
 	 */
@@ -117,7 +122,7 @@ public class ProfilController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Get topo id from request
 	 * @param request
 	 * @return
 	 */
@@ -132,7 +137,7 @@ public class ProfilController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Get site id from request
 	 * @param request
 	 * @return
 	 */

@@ -36,7 +36,10 @@ public class RechercheSiteController extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
-    
+    /**
+     * Set the dropdown values
+     * @param request
+     */
 	public void setDropdownValues(HttpServletRequest request) {
 		request.setAttribute(SiteConsts.VILLE_PAYS, siteService.getAllVillePays());
 	}
@@ -68,16 +71,32 @@ public class RechercheSiteController extends HttpServlet {
 		this.dispatchSearchSitePage(request, response);
 	}
 	
-	
+	/**
+	 * Get string parameter from request
+	 * @param request
+	 * @param parameter
+	 * @return
+	 */
 	private String getParamStrFromReq(HttpServletRequest request, String parameter) {
 		return request.getParameter(parameter).isEmpty() ? null : request.getParameter(parameter);
 	}
 	
+	/**
+	 * Get integer parameter from request
+	 * @param request
+	 * @param parameter
+	 * @return
+	 */
 	private Integer getParamIntFromReq(HttpServletRequest request, String parameter) {
 		return request.getParameter(parameter).isEmpty() ? null : Integer.valueOf(request.getParameter(parameter));
 	}
 	
 
+	/**
+	 * Dispatch the search site page
+	 * @param request
+	 * @param response
+	 */
 	private void dispatchSearchSitePage(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			this.doGet(request, response);

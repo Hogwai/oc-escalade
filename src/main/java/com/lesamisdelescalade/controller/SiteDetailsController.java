@@ -67,7 +67,7 @@ public class SiteDetailsController extends HttpServlet {
 	}
 
 	/**
-	 * 
+	 * Dispatch site details page
 	 * @param request
 	 * @param response
 	 */
@@ -81,7 +81,7 @@ public class SiteDetailsController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Redirect site details page
 	 * @param request
 	 * @param response
 	 */
@@ -98,9 +98,9 @@ public class SiteDetailsController extends HttpServlet {
 	}
 	
 	/**
-	 * 
+	 * Get site id from request
 	 * @param request
-	 * @return
+	 * @return site id
 	 */
 	private Integer getSiteFromReq(HttpServletRequest request) {
 		Integer siteId = null;

@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+/**
+ * Topo entity
+ * @author Lilian
+ *
+ */
 @Entity
 @Table(name = "topo")
 public class Topo implements Serializable {

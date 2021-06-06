@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * Site entity
+ * @author Lilian
+ *
+ */
 @Entity
 @Table(name = "site")
 public class Site implements Serializable {
