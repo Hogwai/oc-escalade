@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.lesamisdelescalade.config"},{"l":"com.lesamisdelescalade.controller"},{"l":"com.lesamisdelescalade.criteria"},{"l":"com.lesamisdelescalade.dao"},{"l":"com.lesamisdelescalade.dao.impl"},{"l":"com.lesamisdelescalade.enums"},{"l":"com.lesamisdelescalade.model"},{"l":"com.lesamisdelescalade.service"},{"l":"com.lesamisdelescalade.service.impl"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.lesamisdelescalade.controller"}]

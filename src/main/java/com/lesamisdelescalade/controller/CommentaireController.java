@@ -68,8 +68,9 @@ public class CommentaireController extends HttpServlet {
 	
 	
 	/**
-	 * Add new comment
+	 * Add comment
 	 * @param request
+	 * @param siteId
 	 */
 	public void addComment(HttpServletRequest request, Integer siteId) {
 		String contenu = request.getParameter("commentText");

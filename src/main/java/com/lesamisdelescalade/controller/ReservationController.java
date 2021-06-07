@@ -76,7 +76,6 @@ public class ReservationController extends HttpServlet {
     /**
      * Accept a topo booking
      * @param request
-     * @param currentUser
      */
     public void acceptTopoBooking(HttpServletRequest request) {
     	Integer topoId = getTopoFromReq(request, TopoConsts.ACCEPT);
@@ -86,7 +85,6 @@ public class ReservationController extends HttpServlet {
     /**
      * Refuse a topo booking
      * @param request
-     * @param currentUser
      */
 	public void refuseTopoBooking(HttpServletRequest request) {
     	Integer topoId = getTopoFromReq(request, TopoConsts.REFUSE);

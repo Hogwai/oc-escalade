@@ -74,7 +74,6 @@ public class ListeToposController extends HttpServlet {
     /**
      * Cancel a topo booking
      * @param request
-     * @param currentUser
      */
     public void cancelTopoBooking(HttpServletRequest request) {
     	Integer topoId = getTopoFromReq(request, TopoConsts.CANCEL);

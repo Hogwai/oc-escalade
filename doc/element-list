@@ -1,9 +1,1 @@
-com.lesamisdelescalade.config
 com.lesamisdelescalade.controller
-com.lesamisdelescalade.criteria
-com.lesamisdelescalade.dao
-com.lesamisdelescalade.dao.impl
-com.lesamisdelescalade.enums
-com.lesamisdelescalade.model
-com.lesamisdelescalade.service
-com.lesamisdelescalade.service.impl
