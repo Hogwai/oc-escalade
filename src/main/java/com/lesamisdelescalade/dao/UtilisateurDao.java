@@ -7,7 +7,7 @@ import com.lesamisdelescalade.model.Utilisateur;
 public interface UtilisateurDao {
     
     /**
-     * Check if a user is registered in the database
+     * Check if a Utilisateur is registered in the database
      * @param userName
      * @param password
      * @return Utilisateur found
@@ -15,7 +15,7 @@ public interface UtilisateurDao {
     Utilisateur isRegisteredUser(String userName, String password);
     
     /**
-     * 
+     * Register a new Utilisateur
      * @param userToRegister
      * @return Utilisateur registered
      * @throws EntityExistsException

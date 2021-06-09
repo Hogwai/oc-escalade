@@ -44,8 +44,8 @@
 					            
 					        </div>				
     				        <div class="col-6 form-group">
-				                <label for="hauteur">Hauteur maximale (mètres)</label>
-				                <input class="form-control" id="hauteur" type="number" placeholder="Hauteur maximale" name="hauteur" min="0">
+				                <label for="hauteur">Hauteur minimal (mètres)</label>
+				                <input class="form-control" id="hauteur" type="number" placeholder="Hauteur minimal" name="hauteur" min="0">
 				            </div>
 					    </div>
 				        <div class="form-row">
@@ -68,7 +68,7 @@
 						<hr class="solid">
 				        <div class="form-row">
 							<div class="col-6 form-group">
-				                <label for="nbSecteurs">Nombre maximal de secteurs</label>
+				                <label for="nbSecteurs">Nombre minimal de secteurs</label>
 				                <input class="form-control" id="nbSecteurs" type="number" placeholder="Nombre de secteurs" name="nbSecteurs" min="1">
 				            </div>
 			            <button class="btn btn-primary btn-lg btn-block mb-2" type="submit">Rechercher</button>

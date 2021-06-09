@@ -64,10 +64,6 @@
 											</div>
 										</p>
 									</div>
-									<div class="card-footer">
-										<small class="text-muted">&#9733; &#9733; &#9733;
-											&#9733; &#9734;</small>
-									</div>
 									<!-- /.card-footer -->
 								</div>
 								<!-- /.card h-100 -->
@@ -128,15 +124,6 @@
 			<!-- /.modal -->
 		</div>
 		<!-- /.container -->
-	
-		<!-- Footer -->
-		<footer class="py-5 bg-dark">
-			<div class="container">
-				<p class="m-0 text-center text-white">Copyright &copy; Your
-					Website 2020</p>
-			</div>
-			<!-- /.container -->
-		</footer>
 	
 		<!-- Bootstrap core JavaScript -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -66,7 +66,7 @@ public class SiteDaoImpl extends BaseDao<Site> implements SiteDao {
 
 		if (criteria.getHauteur() != null) {
 			ParameterExpression<Float> hauteur = critBuilder.parameter(Float.class, SiteConsts.HAUTEUR);
-			conditions.add(critBuilder.lessThanOrEqualTo(siteRoot.<Float>get(SiteConsts.HAUTEUR), hauteur));
+			conditions.add(critBuilder.greaterThanOrEqualTo(siteRoot.<Float>get(SiteConsts.HAUTEUR), hauteur));
 		}
 
 		if (criteria.getTagYN() != null) {
