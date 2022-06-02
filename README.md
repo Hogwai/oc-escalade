@@ -93,10 +93,6 @@ Le site sera alors accessible à cette adresse [http://localhost:8080/lesamisdel
 ## JavaDoc
 La JavaDoc est accessible via le lien suivant: [Documentation](https://hogwai.github.io/les-amis-de-l-escalade/doc/)
 
-## Auteur
-
-* **Lilian Wernert** - Hogwai
-
 ## Licence
 
 Voir [LICENSE.md](LICENSE.md) pour plus de détails.
