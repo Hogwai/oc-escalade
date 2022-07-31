@@ -5,6 +5,7 @@ import com.lesamisdelescalade.model.Utilisateur;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.stream.Stream;
@@ -22,7 +23,8 @@ public class UtilisateurDaoImpl extends BaseDao<Utilisateur> implements Utilisat
     @Override
     public Utilisateur isRegisteredUser(String username, String password) {
     	Utilisateur user;
-        this.getTransaction().begin();
+		EntityTransaction tx = this.getTransaction();
+		tx.begin();
         try {
 			user = (Utilisateur) this.getEntityManager()
 					.createQuery("FROM Utilisateur WHERE pseudo = :pseudo and motDePasse= :motDePasse")
@@ -30,7 +32,7 @@ public class UtilisateurDaoImpl extends BaseDao<Utilisateur> implements Utilisat
 		} catch (NoResultException e) {
 			return null;
 		}
-        this.getTransaction().commit();
+		tx.commit();
 		return user;
     }
 

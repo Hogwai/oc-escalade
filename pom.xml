@@ -111,7 +111,7 @@
 	
 
 	<build>
-		<finalName>les-amis-de-l-escalade</finalName>
+		<finalName>lesamisdelescalade</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
